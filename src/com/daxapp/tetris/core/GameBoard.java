@@ -3,17 +3,20 @@ package com.daxapp.tetris.core;
 import com.daxapp.tetris.constants.TetrisConstants;
 import com.daxapp.tetris.core.layout.Layout;
 import com.daxapp.tetris.core.util.BoardRegionHelper;
+import com.daxapp.tetris.core.util.LayoutDrawHelper;
 
 public class GameBoard
 {
 	private int[][] board;
 	private int row;
 	private int col;
-	//TODO Fijarse si se puede hacer algo así como un TetriminoUpdateHandler q se encarge de mover el tetrmino en pantalla
-	private Layout currentLayout;
-	
 	private int currentCol;
 	private int currentRow;
+	
+	private Layout currentLayout;
+	
+	private boolean tetriminoDead;
+	
 	
 	public GameBoard(int row, int col)
 	{
@@ -38,6 +41,7 @@ public class GameBoard
 
 	public void putTetrimino(Tetrimino tetrimino)
 	{
+		tetriminoDead = false;
 		currentLayout = tetrimino.getCurrentLayout();
 		int layoutSize = currentLayout.getLayoutSize();
 		currentCol = (TetrisConstants.TETRIS_COL - layoutSize)/2; //Obtengo la posicion centrada del tetrimino
@@ -61,8 +65,7 @@ public class GameBoard
 	{
 		//TODO indica si un tetrimino debe ser fijado dentro de los valores del tablero
 		
-		
-		return false;
+		return tetriminoDead;
 	}
 	
 	
@@ -73,6 +76,8 @@ public class GameBoard
 		// el tetrimino, verifico si lo bloquea y si se quiere hacer un movimiento más,
 		//lo pongo como dead y lo seteo en el tablero
 		
+		
+		
 		return false;
 	}
 	
@@ -80,13 +85,19 @@ public class GameBoard
 	{
 		String ret = "";
 		int size = currentLayout.getLayoutSize();
+		int bias = LayoutDrawHelper.getBias(currentLayout); //Cant de íneas en blanco q no tienen q ser dibujadas
+		int lRow,lCol;
+		
 		for(int i = 0; i < TetrisConstants.TETRIS_ROW;i++)
 		{
 			for(int j = 0; j < TetrisConstants.TETRIS_COL;j++)
 			{
-				if(BoardRegionHelper.isOnBoardRegion(i, j, currentRow, currentCol, size , size))
+				lRow = i - currentRow;
+				lCol = j - currentCol;
+				if(BoardRegionHelper.isOnBoardRegion(i, j, currentRow, currentCol, size , size) && lRow + bias < size)
+				//(i,j) pertenecen al cuadrado del layout
 				{
-					ret += currentLayout.getAtPos(i - currentRow, j - currentCol); //La resta es para no pasarme de los límites de los layouts
+					ret += currentLayout.getAtPos(lRow + bias, lCol); 
 				}
 				else
 				{

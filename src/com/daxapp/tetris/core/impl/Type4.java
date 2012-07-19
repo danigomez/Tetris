@@ -9,8 +9,8 @@ public class Type4 extends Tetrimino
 	{
 		return new Layout(new int[][]
 		                  {{0,0,0,0},
-						   {0,0,0,0},
 						   {1,1,1,1},
+						   {0,0,0,0},
 						   {0,0,0,0}});
 	}
 
