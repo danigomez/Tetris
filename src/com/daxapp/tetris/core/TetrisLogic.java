@@ -1,7 +1,6 @@
 package com.daxapp.tetris.core;
 
 import com.daxapp.tetris.constants.TetrisConstants;
-import com.daxapp.tetris.core.impl.Type4;
 import com.daxapp.tetris.pool.TetriminoPool;
 
 public class TetrisLogic extends BaseGameLogic
@@ -31,15 +30,10 @@ public class TetrisLogic extends BaseGameLogic
 		if(!tetrisBoard.isTetriminoAlive())
 		{
 			currentTetrimino = pool.getTetrimino();
-			//currentTetrimino = new Type4();
 			tetrisBoard.putTetrimino(currentTetrimino);
 		}
 	
-		
-		
 		return false;
-		
-		
 		
 	}
 
@@ -52,8 +46,8 @@ public class TetrisLogic extends BaseGameLogic
 			Thread.sleep(1000);
 
 			tetrisBoard.stepDownTetrimino();
-			//tetrisBoard.stepRightTetrimino();
-			currentTetrimino.rotate();
+			tetrisBoard.stepRightTetrimino();
+			//currentTetrimino.rotate();
 			
 		} catch (Exception e)
 		{

@@ -13,7 +13,7 @@ public class GameBoard
 	private int currentCol;
 	private int currentRow;
 	
-	private Layout currentLayout;
+	private LayoutVO currentLayout;
 	
 	private boolean tetriminoDead;
 	
@@ -43,7 +43,7 @@ public class GameBoard
 	public void putTetrimino(Tetrimino tetrimino)
 	{
 		tetriminoDead = false;
-		currentLayout = tetrimino.getCurrentLayout();
+		currentLayout = new LayoutVO(tetrimino.getCurrentLayout());
 		int layoutSize = currentLayout.getLayoutSize();
 		currentCol = (TetrisConstants.TETRIS_COL - layoutSize)/2; //Obtengo la posicion centrada del tetrimino
 		currentRow = 0;
@@ -57,19 +57,23 @@ public class GameBoard
 	
 	public void stepRightTetrimino()
 	{
-		//TODO chequear el area de la piezaa!!!
-		if(BoardRegionHelper.isOnBoardRegion(currentRow, currentCol + 1, 0, 0, TetrisConstants.TETRIS_ROW, TetrisConstants.TETRIS_COL))
+		if(currentLayout.hasRightAvail())
 		{
 			currentCol++;
+			currentLayout.onMoveRight();
 		}
+			
 	}
 	
 	public void stepLeftTetrimino()
 	{
-		if(BoardRegionHelper.isOnBoardRegion(currentRow, currentCol - 1, 0, 0, TetrisConstants.TETRIS_ROW, TetrisConstants.TETRIS_COL))
+		if(currentLayout.hasLeftAvail())
 		{
 			currentCol--;
+			currentLayout.onMoveLeft();
 		}
+			
+		
 	}
 
 	public boolean isTetriminoAlive()
@@ -103,9 +107,9 @@ public class GameBoard
 	public String toString()
 	{
 		String ret = "";
-		LayoutVO layoutVO = new LayoutVO(currentLayout);
-		int size = layoutVO.getLayoutSize();
-		int bias = layoutVO.getBias(); //Cant de íneas en blanco q no tienen q ser dibujadas
+		
+		int size = currentLayout.getLayoutSize();
+		int bias = currentLayout.getBias(); //Cant de íneas en blanco q no tienen q ser dibujadas
 		
 		int lRow,lCol;
 		

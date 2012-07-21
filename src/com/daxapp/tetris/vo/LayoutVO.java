@@ -24,15 +24,35 @@ public class LayoutVO extends Layout
 		return LayoutDrawHelper.getBias(this);
 	}
 	
-	public int getToLeftAvail()
+	public boolean hasLeftAvail()
 	{
-		return toLeftAvail;
+		if(toLeftAvail > 0)
+			return true;
+		return false;
+		
 	}
 	
-	public int getToRightAvail()
+	public boolean hasRightAvail()
 	{
-		return toRigthAvail;
+		if(toRigthAvail > 0)
+			return true;
+		return false;
+		
 	}
+	
+	public void onMoveRight()
+	{
+		toRigthAvail -= 1;
+		toLeftAvail += 1;
+	}
+	
+	public void onMoveLeft()
+	{
+		toRigthAvail += 1;
+		toLeftAvail -= 1;
+	}
+	
+	
 	
 	
 
