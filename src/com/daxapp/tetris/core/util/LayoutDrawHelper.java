@@ -22,7 +22,7 @@ public class LayoutDrawHelper
 	public static int getBias(Layout layout)
 	{
 		int bias = 0;
-		for(int i = 0;LayoutDrawHelper.isZeroRow(layout, i + bias);i++)
+		for(int i = 0;LayoutDrawHelper.isZeroRow(layout, i);i++)
 		{
 			bias++;
 		}

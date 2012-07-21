@@ -13,7 +13,9 @@ public class LayoutVO extends Layout
 	{
 		super(l.getLayoutMatrix());
 		toLeftAvail = (TetrisConstants.TETRIS_COL - getLayoutSize())/2;
-		toRigthAvail = TetrisConstants.TETRIS_COL - toLeftAvail;
+		toRigthAvail = TetrisConstants.TETRIS_COL - (getLayoutSize() + toLeftAvail);
+		System.out.println(toLeftAvail);
+		System.out.println(toRigthAvail);
 	}
 	
 	
@@ -31,5 +33,7 @@ public class LayoutVO extends Layout
 	{
 		return toRigthAvail;
 	}
+	
+	
 
 }
