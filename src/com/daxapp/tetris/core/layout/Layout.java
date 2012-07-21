@@ -21,7 +21,6 @@ public class Layout
 		return layout[row][col];
 	}
 	
-	
 	public void rotate()
 	{
 		int n = getLayoutSize();
@@ -60,5 +59,10 @@ public class Layout
 			s+="\n";
 		}
 		return s;
+	}
+	
+	public int[][] getLayoutMatrix()
+	{
+		return layout;
 	}
 }

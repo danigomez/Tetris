@@ -3,7 +3,7 @@ package com.daxapp.tetris.core;
 import com.daxapp.tetris.constants.TetrisConstants;
 import com.daxapp.tetris.core.layout.Layout;
 import com.daxapp.tetris.core.util.BoardRegionHelper;
-import com.daxapp.tetris.core.util.LayoutDrawHelper;
+import com.daxapp.tetris.vo.LayoutVO;
 
 public class GameBoard
 {
@@ -32,6 +32,7 @@ public class GameBoard
 	{
 		for(int i = 0; i < row;i++)
 		{
+			
 			for(int j = 0; j < col;j++)
 			{
 				board[i][j] = TetrisConstants.NO_DATA;
@@ -52,6 +53,23 @@ public class GameBoard
 	public void stepDownTetrimino()
 	{
 		currentRow++;
+	}
+	
+	public void stepRightTetrimino()
+	{
+		//TODO chequear el area de la piezaa!!!
+		if(BoardRegionHelper.isOnBoardRegion(currentRow, currentCol + 1, 0, 0, TetrisConstants.TETRIS_ROW, TetrisConstants.TETRIS_COL))
+		{
+			currentCol++;
+		}
+	}
+	
+	public void stepLeftTetrimino()
+	{
+		if(BoardRegionHelper.isOnBoardRegion(currentRow, currentCol - 1, 0, 0, TetrisConstants.TETRIS_ROW, TetrisConstants.TETRIS_COL))
+		{
+			currentCol--;
+		}
 	}
 
 	public boolean isTetriminoAlive()
@@ -78,14 +96,17 @@ public class GameBoard
 		
 		
 		
+		
 		return false;
 	}
-	
+
 	public String toString()
 	{
 		String ret = "";
-		int size = currentLayout.getLayoutSize();
-		int bias = LayoutDrawHelper.getBias(currentLayout); //Cant de íneas en blanco q no tienen q ser dibujadas
+		LayoutVO layoutVO = new LayoutVO(currentLayout);
+		int size = layoutVO.getLayoutSize();
+		int bias = layoutVO.getBias(); //Cant de íneas en blanco q no tienen q ser dibujadas
+		
 		int lRow,lCol;
 		
 		for(int i = 0; i < TetrisConstants.TETRIS_ROW;i++)

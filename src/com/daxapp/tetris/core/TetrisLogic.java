@@ -32,18 +32,6 @@ public class TetrisLogic extends BaseGameLogic
 			currentTetrimino = pool.getTetrimino();
 			tetrisBoard.putTetrimino(currentTetrimino);
 		}
-		try
-		{
-			//Esto se hace en el Callback de gráficos!! :D
-			System.out.println(tetrisBoard);
-			Thread.sleep(1000);
-
-			tetrisBoard.stepDownTetrimino();
-			
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
 	
 		
 		
@@ -55,7 +43,21 @@ public class TetrisLogic extends BaseGameLogic
 
 	protected void onGraphicsUpdate()
 	{
+		try
+		{
+		
+			System.out.println(tetrisBoard);
+			Thread.sleep(1000);
+
+			tetrisBoard.stepDownTetrimino();
+			//tetrisBoard.stepRightTetrimino();
+			currentTetrimino.rotate();
 			
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	
 	}
 
 	protected void onSoundPlay()
