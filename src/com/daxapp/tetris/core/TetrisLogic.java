@@ -8,7 +8,6 @@ public class TetrisLogic extends BaseGameLogic
 	//TODO Implementar el tablero de tetris
 	private GameBoard tetrisBoard;
 	private TetriminoPool pool;
-	private Tetrimino currentTetrimino;
 
 	
 	protected void onCreateResources()
@@ -29,8 +28,8 @@ public class TetrisLogic extends BaseGameLogic
 	{
 		if(!tetrisBoard.isTetriminoAlive())
 		{
-			currentTetrimino = pool.getTetrimino();
-			tetrisBoard.putTetrimino(currentTetrimino);
+			tetrisBoard.putTetrimino(pool.getTetrimino());
+			
 		}
 	
 		return false;
@@ -39,6 +38,7 @@ public class TetrisLogic extends BaseGameLogic
 
 	protected void onGraphicsUpdate()
 	{
+		
 		try
 		{
 		
@@ -46,8 +46,8 @@ public class TetrisLogic extends BaseGameLogic
 			Thread.sleep(1000);
 
 			tetrisBoard.stepDownTetrimino();
-			tetrisBoard.stepRightTetrimino();
-			//currentTetrimino.rotate();
+			tetrisBoard.stepLeftTetrimino();
+			tetrisBoard.rotateTetrimino();
 			
 		} catch (Exception e)
 		{

@@ -15,7 +15,7 @@ public class GameBoard
 	
 	private LayoutVO currentLayout;
 	
-	private boolean tetriminoDead;
+	private boolean tetriminoDead = false;
 	
 	
 	public GameBoard(int row, int col)
@@ -52,6 +52,9 @@ public class GameBoard
 	
 	public void stepDownTetrimino()
 	{
+		//TODO chequear el tamaño del tablero y matar el tetrmino cuando llegue al fondo del tablero
+		//insertarlo en el tabler y ponerlo como dead
+		//if(currentLayout.hasDownAvail() && !isTetriminoDead())
 		currentRow++;
 	}
 	
@@ -73,7 +76,6 @@ public class GameBoard
 			currentLayout.onMoveLeft();
 		}
 			
-		
 	}
 
 	public boolean isTetriminoAlive()
@@ -85,11 +87,13 @@ public class GameBoard
 	
 	public boolean isTetriminoDead()
 	{
-		//TODO indica si un tetrimino debe ser fijado dentro de los valores del tablero
-		
 		return tetriminoDead;
 	}
 	
+	public void rotateTetrimino()
+	{
+		currentLayout.rotate();
+	}
 	
 	private boolean checkCollision(Layout layout)
 	{
