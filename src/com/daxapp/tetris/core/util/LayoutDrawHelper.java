@@ -47,12 +47,19 @@ public class LayoutDrawHelper
 					auxbias++;
 				}
 				else
+				{
 					break;
+				}
 			}
 			if(aux == 0)
+			{
 				bias = 0;
+			}
 			else if(auxbias != 0 && bias > auxbias)
+			{
 				bias = auxbias;
+			}
+			
 		}
 		System.out.println("LEFT BIAS ->" + bias);
 		return bias;
@@ -60,8 +67,38 @@ public class LayoutDrawHelper
 
 	public static int getRightBias(Layout layout)
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		int auxbias = 0,bias = 10,aux = 0;
+		int size = layout.getLayoutSize();
+		boolean zero;
+		
+		for(int i = 0;i < size;i++)
+		{
+			zero = isZeroRow(layout, i);
+			auxbias = 0;
+			for(int j = size-1;j >= 0; j--)
+			{
+				aux = j;
+				if(!zero && layout.getAtPos(i, j) == TetrisConstants.NO_DATA)
+				{
+					auxbias++;
+				}
+				else
+				{
+					break;
+				}
+			}
+			if(aux == size - 1)
+			{
+				bias = 0;
+			}
+			else if(auxbias != 0 && bias > auxbias)
+			{
+				bias = auxbias;
+			}
+			
+		}
+		System.out.println("RIGHT BIAS ->" + bias);
+		return bias;
 	}
 	
 
