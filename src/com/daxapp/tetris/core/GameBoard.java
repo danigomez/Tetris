@@ -93,6 +93,8 @@ public class GameBoard
 	public void rotateTetrimino()
 	{
 		currentLayout.rotate();
+		currentCol += currentLayout.getColOffset();
+		currentRow += currentLayout.getRowOffset();
 	}
 	
 	private boolean checkCollision(Layout layout)
