@@ -75,7 +75,7 @@ public class LayoutVO extends Layout
 		onRotate();
 	}
 	
-	public void onRotate()
+	private void onRotate()
 	{
 		//TODO Agregar el control para el bounding de las filas, es decir, q al rotar no se pase de los límites
 		//del tablero hacia abajo o arriba
@@ -109,9 +109,9 @@ public class LayoutVO extends Layout
 			toRigthAvail = TetrisConstants.TETRIS_COL - getLayoutSize();
 			
 		}
-		else if(toRigthAvail >= TetrisConstants.TETRIS_COL)
+		else if(toRigthAvail < 0)
 		{
-			ret = TetrisConstants.TETRIS_COL - toRigthAvail; //< 0
+			ret = toRigthAvail; //< 0
 			toRigthAvail = 0;
 			toLeftAvail = TetrisConstants.TETRIS_COL - getLayoutSize();
 			
