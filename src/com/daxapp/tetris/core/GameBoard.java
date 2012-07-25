@@ -154,9 +154,9 @@ public class GameBoard
 		
 		int lRow,lCol;
 		
-		for(int i = 0; i < TetrisConstants.TETRIS_ROW;i++)
+		for(int i = currentRow; i < TetrisConstants.TETRIS_ROW;i++)
 		{
-			for(int j = 0; j < TetrisConstants.TETRIS_COL;j++)
+			for(int j = currentCol; j < TetrisConstants.TETRIS_COL;j++)
 			{
 				lRow = i - currentRow;
 				lCol = j - currentCol;
