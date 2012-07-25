@@ -9,8 +9,10 @@ public class LayoutVO extends Layout
 	private int toLeftAvail; //Cantidad de movimientos a izquierda restantes
 	private int toRigthAvail; //Cantidad de movimientos a derecha restantes
 	private int toDownAvail;
+	
 	private int leftBias;
 	private int rightBias;
+	private int downBias;
 	
 	private int colOffset;
 	private int rowOffset;
@@ -26,10 +28,9 @@ public class LayoutVO extends Layout
 		
 		leftBias = LayoutDrawHelper.getLeftBias(this);
 		rightBias = LayoutDrawHelper.getRightBias(this);
-
-		System.out.println(toLeftAvail);
-		System.out.println(toRigthAvail);
-		System.out.println(toDownAvail);
+		downBias = LayoutDrawHelper.getDownBias(this);
+		
+		
 	}
 	
 	public int getBias()
@@ -71,18 +72,27 @@ public class LayoutVO extends Layout
 	{
 		toRigthAvail -= 1;
 		toLeftAvail += 1;
+	
 	}
 	
 	public void onMoveLeft()
 	{
 		toRigthAvail += 1;
 		toLeftAvail -= 1;
+
+	}
+	
+	public void onMoveDown()
+	{
+		toDownAvail -= 1;
+
 	}
 	
 	public void rotate()
 	{
 		super.rotate();
 		onRotate();
+
 	}
 	
 	private void onRotate()
@@ -92,12 +102,15 @@ public class LayoutVO extends Layout
 
 		int lBias = LayoutDrawHelper.getLeftBias(this);
 		int rBias = LayoutDrawHelper.getRightBias(this);
+		int dBias = LayoutDrawHelper.getDownBias(this);
 		
 		toLeftAvail += lBias - leftBias; //Si el bias actual es mayor al bias anterior, sumo la diferencia al avail nuevo
 		toRigthAvail += rBias - rightBias;
+		toDownAvail += dBias - downBias;
 
 		leftBias = lBias; //Columnas vacias q hay hasta llegar al tetrimino por izquierda
 		rightBias = rBias;  //Columnas vacias q hay hasta llegar al tetrimino por derecha
+		downBias = dBias;
 		
 	    rowOffset = fixOutRow();
 	    colOffset = fixOutCol();
@@ -106,7 +119,13 @@ public class LayoutVO extends Layout
 	private int fixOutRow()
 	{
 		//TODO actualiza el bias vertical e indica con q offset se tiene q arreglar la fila de dibujado en el tablero
-		return 0;
+		int ret = 0;
+		if(toDownAvail < 0) //<0
+		{
+			ret = toDownAvail;
+			toDownAvail = 0;
+		}
+		return ret;
 	}
 	
 	private int fixOutCol()

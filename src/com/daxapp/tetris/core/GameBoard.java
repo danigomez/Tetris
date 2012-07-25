@@ -54,10 +54,19 @@ public class GameBoard
 	{
 		//TODO chequear el tamaño del tablero y matar el tetrmino cuando llegue al fondo del tablero
 		//insertarlo en el tabler y ponerlo como dead
-		//if(currentLayout.hasDownAvail() && !isTetriminoDead())
-		currentRow++;
+		if(currentLayout.hasDownAvail())
+		{
+			currentRow++;
+			currentLayout.onMoveDown();
+		}
+		else
+		{
+			tetriminoDead = true;
+			putOnBoard();
+		}
+		
 	}
-	
+
 	public void stepRightTetrimino()
 	{
 		if(currentLayout.hasRightAvail())
@@ -80,14 +89,7 @@ public class GameBoard
 
 	public boolean isTetriminoAlive()
 	{
-		if(currentRow != 0)
-			return true;
-		return false;
-	}
-	
-	public boolean isTetriminoDead()
-	{
-		return tetriminoDead;
+		return !tetriminoDead && currentRow != 0;
 	}
 	
 	public void rotateTetrimino()
@@ -143,4 +145,12 @@ public class GameBoard
 		
 		return ret;
 	}
+	
+	
+	private void putOnBoard()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 }
