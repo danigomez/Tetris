@@ -149,8 +149,27 @@ public class GameBoard
 	
 	private void putOnBoard()
 	{
-		// TODO Auto-generated method stub
+		int size = currentLayout.getLayoutSize();
+		int bias = currentLayout.getBias(); //Cant de íneas en blanco q no tienen q ser dibujadas
 		
+		int lRow,lCol;
+		
+		for(int i = 0; i < TetrisConstants.TETRIS_ROW;i++)
+		{
+			for(int j = 0; j < TetrisConstants.TETRIS_COL;j++)
+			{
+				lRow = i - currentRow;
+				lCol = j - currentCol;
+				if(BoardRegionHelper.isOnBoardRegion(i, j, currentRow, currentCol, size , size) && lRow + bias < size)
+				//(i,j) pertenecen al cuadrado del layout
+				{
+					int value = currentLayout.getAtPos(lRow + bias, lCol);
+					if(value != TetrisConstants.NO_DATA)board[i][j] = value;
+				}
+			
+			}
+			
+		}
 	}
 
 }
