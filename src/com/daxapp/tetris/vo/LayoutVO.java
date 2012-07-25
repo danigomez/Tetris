@@ -24,7 +24,7 @@ public class LayoutVO extends Layout
 		super(l.getLayoutMatrix());
 		toLeftAvail = (TetrisConstants.TETRIS_COL - getLayoutSize())/2; 
 		toRigthAvail = TetrisConstants.TETRIS_COL - (getLayoutSize() + toLeftAvail);
-		toDownAvail = TetrisConstants.TETRIS_ROW -(getLayoutSize() - LayoutDrawHelper.getBias(this) - LayoutDrawHelper.getDownBias(this));
+		toDownAvail = TetrisConstants.TETRIS_ROW - 1 - (getLayoutSize() - LayoutDrawHelper.getBias(this) - LayoutDrawHelper.getDownBias(this));
 		
 		leftBias = LayoutDrawHelper.getLeftBias(this);
 		rightBias = LayoutDrawHelper.getRightBias(this);
@@ -148,7 +148,7 @@ public class LayoutVO extends Layout
 		
 		System.out.println("LEFT AVAIL -> " + toLeftAvail);
 		System.out.println("RIGHT AVAIL -> " + toRigthAvail);
-		
+		System.out.println("DOWN AVAIL -> " + toDownAvail);
 		return ret;
 	}
 	
