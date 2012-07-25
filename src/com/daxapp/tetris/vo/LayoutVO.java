@@ -8,6 +8,7 @@ public class LayoutVO extends Layout
 {
 	private int toLeftAvail; //Cantidad de movimientos a izquierda restantes
 	private int toRigthAvail; //Cantidad de movimientos a derecha restantes
+	private int toDownAvail;
 	private int leftBias;
 	private int rightBias;
 	
@@ -21,11 +22,14 @@ public class LayoutVO extends Layout
 		super(l.getLayoutMatrix());
 		toLeftAvail = (TetrisConstants.TETRIS_COL - getLayoutSize())/2; 
 		toRigthAvail = TetrisConstants.TETRIS_COL - (getLayoutSize() + toLeftAvail);
+		toDownAvail = TetrisConstants.TETRIS_ROW -(getLayoutSize() - LayoutDrawHelper.getBias(this) - LayoutDrawHelper.getDownBias(this));
+		
 		leftBias = LayoutDrawHelper.getLeftBias(this);
 		rightBias = LayoutDrawHelper.getRightBias(this);
-		
+
 		System.out.println(toLeftAvail);
 		System.out.println(toRigthAvail);
+		System.out.println(toDownAvail);
 	}
 	
 	public int getBias()
@@ -55,6 +59,12 @@ public class LayoutVO extends Layout
 	{
 		//Quedan movimientos a derecha?
 		return avail(toRigthAvail);
+	}
+	
+	public boolean hasDownAvail()
+	{
+		//Quedan movimientos para abajo?
+		return avail(toDownAvail);
 	}
 	
 	public void onMoveRight()

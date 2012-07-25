@@ -29,6 +29,18 @@ public class LayoutDrawHelper
 		return bias;
 	}
 	
+	public static int getDownBias(Layout layout)
+	{
+		int ret = 0;
+		
+		for(int i = layout.getLayoutSize()-1;LayoutDrawHelper.isZeroRow(layout, i);i--)
+		{
+			ret++;
+		}
+		
+		return ret;
+	}
+	
 	public static int getLeftBias(Layout layout)
 	{
 		int auxbias = 0,bias = 10,aux = 0;
