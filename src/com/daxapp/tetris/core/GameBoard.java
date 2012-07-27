@@ -52,8 +52,6 @@ public class GameBoard
 	
 	public void stepDownTetrimino()
 	{
-		//TODO chequear el tamaño del tablero y matar el tetrmino cuando llegue al fondo del tablero
-		//insertarlo en el tabler y ponerlo como dead
 		if(currentLayout.hasDownAvail())
 		{
 			currentRow++;
@@ -117,8 +115,8 @@ public class GameBoard
 		String ret = "";
 		
 		int size = currentLayout.getLayoutSize();
-		int bias = currentLayout.getBias(); //Cant de íneas en blanco q no tienen q ser dibujadas
-		
+		//int bias = currentLayout.getBias(); //Cant de íneas en blanco q no tienen q ser dibujadas
+	
 		int lRow,lCol;
 		
 		for(int i = 0; i < TetrisConstants.TETRIS_ROW;i++)
@@ -127,10 +125,11 @@ public class GameBoard
 			{
 				lRow = i - currentRow;
 				lCol = j - currentCol;
-				if(BoardRegionHelper.isOnBoardRegion(i, j, currentRow, currentCol, size , size) && lRow + bias < size)
+				if(BoardRegionHelper.isOnBoardRegion(i, j, currentRow, currentCol, size , size) && lRow < size)
 				//(i,j) pertenecen al cuadrado del layout
 				{
-					ret += currentLayout.getAtPos(lRow + bias, lCol); 
+
+					ret += currentLayout.getAtPos(lRow, lCol); 
 				}
 				else
 				{

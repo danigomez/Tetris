@@ -13,6 +13,7 @@ public class LayoutVO extends Layout
 	private int leftBias;
 	private int rightBias;
 	private int downBias;
+	private int upBias;
 	
 	private int colOffset;
 	private int rowOffset;
@@ -24,12 +25,12 @@ public class LayoutVO extends Layout
 		super(l.getLayoutMatrix());
 		toLeftAvail = (TetrisConstants.TETRIS_COL - getLayoutSize())/2; 
 		toRigthAvail = TetrisConstants.TETRIS_COL - (getLayoutSize() + toLeftAvail);
-		toDownAvail = TetrisConstants.TETRIS_ROW - 1 - (getLayoutSize() - LayoutDrawHelper.getBias(this) - LayoutDrawHelper.getDownBias(this));
-		
+		toDownAvail = TetrisConstants.TETRIS_ROW - (getLayoutSize() - LayoutDrawHelper.getDownBias(this));
+
+		System.out.println("DOWN AVAIL INICIAL " + toDownAvail);
 		leftBias = LayoutDrawHelper.getLeftBias(this);
 		rightBias = LayoutDrawHelper.getRightBias(this);
 		downBias = LayoutDrawHelper.getDownBias(this);
-		
 		
 	}
 	
@@ -85,7 +86,6 @@ public class LayoutVO extends Layout
 	public void onMoveDown()
 	{
 		toDownAvail -= 1;
-
 	}
 	
 	public void rotate()
@@ -97,17 +97,15 @@ public class LayoutVO extends Layout
 	
 	private void onRotate()
 	{
-		//TODO Agregar el control para el bounding de las filas, es decir, q al rotar no se pase de los límites
-		//del tablero hacia abajo o arriba
-
 		int lBias = LayoutDrawHelper.getLeftBias(this);
 		int rBias = LayoutDrawHelper.getRightBias(this);
 		int dBias = LayoutDrawHelper.getDownBias(this);
 		
 		toLeftAvail += lBias - leftBias; //Si el bias actual es mayor al bias anterior, sumo la diferencia al avail nuevo
 		toRigthAvail += rBias - rightBias;
-		toDownAvail += dBias - downBias;
-
+		toDownAvail += dBias - downBias ;
+	
+		
 		leftBias = lBias; //Columnas vacias q hay hasta llegar al tetrimino por izquierda
 		rightBias = rBias;  //Columnas vacias q hay hasta llegar al tetrimino por derecha
 		downBias = dBias;
@@ -118,13 +116,14 @@ public class LayoutVO extends Layout
 	
 	private int fixOutRow()
 	{
-		//TODO actualiza el bias vertical e indica con q offset se tiene q arreglar la fila de dibujado en el tablero
 		int ret = 0;
 		if(toDownAvail < 0) //<0
 		{
 			ret = toDownAvail;
 			toDownAvail = 0;
 		}
+		
+		System.out.println("DOWN AVAIL FIXED -> " + toDownAvail);
 		return ret;
 	}
 	
@@ -146,9 +145,6 @@ public class LayoutVO extends Layout
 			
 		}
 		
-		System.out.println("LEFT AVAIL -> " + toLeftAvail);
-		System.out.println("RIGHT AVAIL -> " + toRigthAvail);
-		System.out.println("DOWN AVAIL -> " + toDownAvail);
 		return ret;
 	}
 	
