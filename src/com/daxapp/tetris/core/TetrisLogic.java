@@ -1,6 +1,7 @@
 package com.daxapp.tetris.core;
 
 import com.daxapp.tetris.constants.TetrisConstants;
+import com.daxapp.tetris.core.impl.Type4;
 import com.daxapp.tetris.pool.TetriminoPool;
 
 public class TetrisLogic extends BaseGameLogic
@@ -27,8 +28,9 @@ public class TetrisLogic extends BaseGameLogic
 	{
 		if(!tetrisBoard.isTetriminoAlive())
 		{
-			tetrisBoard.putTetrimino(pool.getTetrimino());
-//			tetrisBoard.putTetrimino(new Type4());// TODO chequear el caso en q da mal el downAvail con esta pieza
+//			tetrisBoard.putTetrimino(pool.getTetrimino());
+			tetrisBoard.putTetrimino(new Type4());// TODO chequear el caso en q da mal el downAvail con esta pieza
+
 		}
 	
 		return false;
@@ -37,18 +39,12 @@ public class TetrisLogic extends BaseGameLogic
 
 	protected void onGraphicsUpdate()
 	{
-		
 		try
 		{
-		
 			System.out.println(tetrisBoard);
 			Thread.sleep(1000);
 
 			tetrisBoard.stepDownTetrimino();
-
-			tetrisBoard.rotateTetrimino();
-
-
 			
 		} catch (Exception e)
 		{

@@ -118,18 +118,23 @@ public class GameBoard
 		//int bias = currentLayout.getBias(); //Cant de íneas en blanco q no tienen q ser dibujadas
 	
 		int lRow,lCol;
+		int toDraw;
 		
-		for(int i = 0; i < TetrisConstants.TETRIS_ROW;i++)
+		for(int i = TetrisConstants.BIAS; i < TetrisConstants.TETRIS_ROW;i++)
 		{
 			for(int j = 0; j < TetrisConstants.TETRIS_COL;j++)
 			{
 				lRow = i - currentRow;
 				lCol = j - currentCol;
+				
 				if(BoardRegionHelper.isOnBoardRegion(i, j, currentRow, currentCol, size , size) && lRow < size)
 				//(i,j) pertenecen al cuadrado del layout
 				{
-
-					ret += currentLayout.getAtPos(lRow, lCol); 
+					toDraw = currentLayout.getAtPos(lRow, lCol);
+					if(toDraw != TetrisConstants.NO_DATA)
+						ret += toDraw ; 
+					else
+						ret += board[i][j];
 				}
 				else
 				{
@@ -149,7 +154,6 @@ public class GameBoard
 	private void putOnBoard()
 	{
 		int size = currentLayout.getLayoutSize();
-		int bias = currentLayout.getBias(); //Cant de íneas en blanco q no tienen q ser dibujadas
 		
 		int lRow,lCol;
 		
@@ -159,10 +163,10 @@ public class GameBoard
 			{
 				lRow = i - currentRow;
 				lCol = j - currentCol;
-				if(BoardRegionHelper.isOnBoardRegion(i, j, currentRow, currentCol, size , size) && lRow + bias < size)
+				if(BoardRegionHelper.isOnBoardRegion(i, j, currentRow, currentCol, size , size) && lRow  < size)
 				//(i,j) pertenecen al cuadrado del layout
 				{
-					int value = currentLayout.getAtPos(lRow + bias, lCol);
+					int value = currentLayout.getAtPos(lRow, lCol);
 					if(value != TetrisConstants.NO_DATA)board[i][j] = value;
 				}
 			
