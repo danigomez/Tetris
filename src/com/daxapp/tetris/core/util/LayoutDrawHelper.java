@@ -73,7 +73,7 @@ public class LayoutDrawHelper
 			}
 			
 		}
-		System.out.println("LEFT BIAS ->" + bias);
+		//System.out.println("LEFT BIAS ->" + bias);
 		return bias;
 	}
 
@@ -109,7 +109,7 @@ public class LayoutDrawHelper
 			}
 			
 		}
-		System.out.println("RIGHT BIAS ->" + bias);
+		//System.out.println("RIGHT BIAS ->" + bias);
 		return bias;
 	}
 	

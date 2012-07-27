@@ -17,8 +17,6 @@ public class LayoutVO extends Layout
 	private int colOffset;
 	private int rowOffset;
 	
-	
-	
 	public LayoutVO(Layout l)
 	{
 		super(l.getLayoutMatrix());
@@ -26,11 +24,11 @@ public class LayoutVO extends Layout
 		toRigthAvail = TetrisConstants.TETRIS_COL - (getLayoutSize() + toLeftAvail);
 		toDownAvail = TetrisConstants.TETRIS_ROW - (getLayoutSize() - LayoutDrawHelper.getDownBias(this));
 
-		System.out.println("DOWN AVAIL INICIAL " + toDownAvail);
 		leftBias = LayoutDrawHelper.getLeftBias(this);
 		rightBias = LayoutDrawHelper.getRightBias(this);
 		downBias = LayoutDrawHelper.getDownBias(this);
 		
+//		System.out.println("DOWN AVAIL INICIAL " + toDownAvail);
 	}
 	
 	public int getColOffset()
@@ -98,7 +96,6 @@ public class LayoutVO extends Layout
 		toRigthAvail += rBias - rightBias;
 		toDownAvail += dBias - downBias ;
 	
-		
 		leftBias = lBias; //Columnas vacias q hay hasta llegar al tetrimino por izquierda
 		rightBias = rBias;  //Columnas vacias q hay hasta llegar al tetrimino por derecha
 		downBias = dBias;
@@ -116,7 +113,7 @@ public class LayoutVO extends Layout
 			toDownAvail = 0;
 		}
 		
-		System.out.println("DOWN AVAIL FIXED -> " + toDownAvail);
+		//System.out.println("DOWN AVAIL FIXED -> " + toDownAvail);
 		return ret;
 	}
 	
