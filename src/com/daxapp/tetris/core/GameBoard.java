@@ -127,14 +127,13 @@ public class GameBoard
 				lRow = i - currentRow;
 				lCol = j - currentCol;
 				
-				if(BoardRegionHelper.isOnBoardRegion(i, j, currentRow, currentCol, size , size) && lRow < size)
+				if(BoardRegionHelper.isOnBoardRegion(i, j, currentRow, currentCol, size , size) 
+						&& lRow < size
+						&& (toDraw = currentLayout.getAtPos(lRow, lCol)) != TetrisConstants.NO_DATA)
 				//(i,j) pertenecen al cuadrado del layout
 				{
-					toDraw = currentLayout.getAtPos(lRow, lCol);
-					if(toDraw != TetrisConstants.NO_DATA)
-						ret += toDraw ; 
-					else
-						ret += board[i][j];
+						ret += toDraw; 
+		
 				}
 				else
 				{
