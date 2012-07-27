@@ -103,11 +103,9 @@ public class GameBoard
 		// el tetrimino, verifico si lo bloquea y si se quiere hacer un movimiento más,
 		//lo pongo como dead y lo seteo en el tablero
 		
-		
-		
-		
 		return false;
 	}
+
 
 	public String toString()
 	{
@@ -154,18 +152,19 @@ public class GameBoard
 		int size = currentLayout.getLayoutSize();
 		
 		int lRow,lCol;
-		
+		int toDraw;
 		for(int i = currentRow; i < TetrisConstants.TETRIS_ROW;i++)
 		{
 			for(int j = currentCol; j < TetrisConstants.TETRIS_COL;j++)
 			{
 				lRow = i - currentRow;
 				lCol = j - currentCol;
-				if(BoardRegionHelper.isOnBoardRegion(i, j, currentRow, currentCol, size , size) && lRow  < size)
+				if(BoardRegionHelper.isOnBoardRegion(i, j, currentRow, currentCol, size , size) 
+						&& lRow < size
+						&& (toDraw = currentLayout.getAtPos(lRow, lCol)) != TetrisConstants.NO_DATA)
 				//(i,j) pertenecen al cuadrado del layout
 				{
-					int value = currentLayout.getAtPos(lRow, lCol);
-					if(value != TetrisConstants.NO_DATA)board[i][j] = value;
+					board[i][j] = toDraw;
 				}
 			
 			}
