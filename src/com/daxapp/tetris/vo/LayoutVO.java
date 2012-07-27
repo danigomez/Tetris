@@ -13,7 +13,6 @@ public class LayoutVO extends Layout
 	private int leftBias;
 	private int rightBias;
 	private int downBias;
-	private int upBias;
 	
 	private int colOffset;
 	private int rowOffset;
@@ -33,12 +32,6 @@ public class LayoutVO extends Layout
 		downBias = LayoutDrawHelper.getDownBias(this);
 		
 	}
-	
-	public int getBias()
-	{
-		return LayoutDrawHelper.getBias(this);
-	}
-	
 	
 	public int getColOffset()
 	{

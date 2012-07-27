@@ -1,7 +1,6 @@
 package com.daxapp.tetris.core;
 
 import com.daxapp.tetris.constants.TetrisConstants;
-import com.daxapp.tetris.core.layout.Layout;
 import com.daxapp.tetris.core.util.BoardRegionHelper;
 import com.daxapp.tetris.vo.LayoutVO;
 
@@ -97,7 +96,7 @@ public class GameBoard
 		currentRow += currentLayout.getRowOffset();
 	}
 	
-	private boolean checkCollision(Layout layout)
+	private boolean checkCollision()
 	{
 		//TODO Verificar cuando un tetrimino tiene bloques q puedes impedir su camino, es decir,
 		//por cada bloque del tetrmino, verifico si algo bloquea su mov, es decir dentro del area q ocupe
