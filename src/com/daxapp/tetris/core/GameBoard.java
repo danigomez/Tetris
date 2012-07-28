@@ -2,6 +2,7 @@ package com.daxapp.tetris.core;
 
 import com.daxapp.tetris.constants.TetrisConstants;
 import com.daxapp.tetris.core.util.BoardRegionHelper;
+import com.daxapp.tetris.core.util.CollisionResult;
 import com.daxapp.tetris.vo.LayoutVO;
 
 public class GameBoard
@@ -96,14 +97,39 @@ public class GameBoard
 		currentRow += currentLayout.getRowOffset();
 	}
 	
-	private boolean checkCollision()
+	private CollisionResult checkCollision()
 	{
 		//TODO Verificar cuando un tetrimino tiene bloques q puedes impedir su camino, es decir,
 		//por cada bloque del tetrmino, verifico si algo bloquea su mov, es decir dentro del area q ocupe
 		// el tetrimino, verifico si lo bloquea y si se quiere hacer un movimiento más,
 		//lo pongo como dead y lo seteo en el tablero
+		int size = currentLayout.getLayoutSize();
+		int lRow,lCol;
 		
-		return false;
+		CollisionResult ret = null;
+		
+		for(int i = currentRow; i < currentRow + size;i++)
+		{
+			for(int j = currentCol; j <  currentCol + size;j++)
+			{
+				lRow = i - currentRow;
+				lCol = j - currentCol;
+				if(BoardRegionHelper.isOnBoardRegion(i, j, currentRow, currentCol, size , size) 
+						&& lRow < size
+						&& currentLayout.getAtPos(lRow, lCol) != TetrisConstants.NO_DATA)
+				//(i,j) pertenecen al cuadrado del layout
+				{
+					
+					
+					
+				}
+			
+			}
+		}
+		
+		return ret;
+		
+		
 	}
 
 
