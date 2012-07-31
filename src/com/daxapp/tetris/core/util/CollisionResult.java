@@ -2,47 +2,70 @@ package com.daxapp.tetris.core.util;
 
 public class CollisionResult
 {
-	private boolean rightCollision;
-	private boolean leftCollision;
-	private boolean downCollision;
+	private boolean onRightCollision;
+	private boolean onLeftCollision;
+	private boolean onDownCollision;
+	private boolean onRotateCollision;
 	
 	public CollisionResult()
 	{
-		rightCollision = leftCollision = downCollision = false;
+		onDownCollision = false;
+		onLeftCollision = false;
+		onRightCollision = false;
+		onRotateCollision = false;
 		
 	}
 	
 	
 	public boolean isRightCollision()
 	{
-		return rightCollision;
+		return onRightCollision;
 	}
 	
 	public void setRightCollision(boolean rightCollision)
 	{
-		this.rightCollision = rightCollision;
+		this.onRightCollision = rightCollision;
 	}
 	
 	public boolean isLeftCollision()
 	{
-		return leftCollision;
+		return onLeftCollision;
 	}
 	
 	public void setLeftCollision(boolean leftCollision)
 	{
-		this.leftCollision = leftCollision;
+		this.onLeftCollision = leftCollision;
 	}
 	
 	public boolean isDownCollision()
 	{
-		return downCollision;
+		return onDownCollision;
 	}
 	
 	public void setDownCollision(boolean downCollision)
 	{
-		this.downCollision = downCollision;
+		this.onDownCollision = downCollision;
 	}
 	
+	public boolean isRotatedCollision()
+	{
+		return onRotateCollision;
+	}
 	
+	public void setRotatedCollision(boolean rotatedCollision)
+	{
+		this.onRotateCollision = rotatedCollision;
+	}
+	
+	public String toString()
+	{
+		String ret = "";
+		
+		ret += "RIGHT COLLISION -> " + onRightCollision + " ";
+		ret +="LEFT COLLISION -> " + onLeftCollision + " ";
+		ret +="DOWN COLLISION -> " + onDownCollision;
+		
+		return ret;
+	}
 
 }

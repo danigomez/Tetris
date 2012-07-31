@@ -2,6 +2,7 @@ package com.daxapp.tetris.core;
 
 import com.daxapp.tetris.constants.TetrisConstants;
 import com.daxapp.tetris.core.util.BoardRegionHelper;
+import com.daxapp.tetris.core.util.CollisionHelper;
 import com.daxapp.tetris.core.util.CollisionResult;
 import com.daxapp.tetris.vo.LayoutVO;
 
@@ -14,6 +15,8 @@ public class GameBoard
 	private int currentRow;
 	
 	private LayoutVO currentLayout;
+
+	private CollisionResult collisionResult;
 	
 	private boolean tetriminoDead = false;
 	
@@ -47,15 +50,18 @@ public class GameBoard
 		int layoutSize = currentLayout.getLayoutSize();
 		currentCol = (TetrisConstants.TETRIS_COL - layoutSize)/2; //Obtengo la posicion centrada del tetrimino
 		currentRow = 0;
+		collisionResult = new CollisionResult();
 
 	}
 	
 	public void stepDownTetrimino()
 	{
-		if(currentLayout.hasDownAvail())
+		
+		if(currentLayout.hasDownAvail() && !collisionResult.isDownCollision())
 		{
 			currentRow++;
 			currentLayout.onMoveDown();
+			collisionResult = checkCollision();
 		}
 		else
 		{
@@ -67,20 +73,22 @@ public class GameBoard
 
 	public void stepRightTetrimino()
 	{
-		if(currentLayout.hasRightAvail())
+		if(currentLayout.hasRightAvail() && !collisionResult.isRightCollision())
 		{
 			currentCol++;
 			currentLayout.onMoveRight();
+			collisionResult = checkCollision();
 		}
 			
 	}
 	
 	public void stepLeftTetrimino()
 	{
-		if(currentLayout.hasLeftAvail())
+		if(currentLayout.hasLeftAvail() && !collisionResult.isLeftCollision())
 		{
 			currentCol--;
 			currentLayout.onMoveLeft();
+			collisionResult = checkCollision();
 		}
 			
 	}
@@ -106,7 +114,7 @@ public class GameBoard
 		int size = currentLayout.getLayoutSize();
 		int lRow,lCol;
 		
-		CollisionResult ret = null;
+		CollisionResult ret = new CollisionResult();
 		
 		for(int i = currentRow; i < currentRow + size;i++)
 		{
@@ -120,13 +128,13 @@ public class GameBoard
 				//(i,j) pertenecen al cuadrado del layout
 				{
 					
-					
+					CollisionHelper.collisionOnMove(board, i, j, ret);
 					
 				}
 			
 			}
 		}
-		
+		System.out.println(ret);
 		return ret;
 		
 		

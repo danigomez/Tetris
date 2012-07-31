@@ -28,8 +28,8 @@ public class TetrisLogic extends BaseGameLogic
 	{
 		if(!tetrisBoard.isTetriminoAlive())
 		{
-//			tetrisBoard.putTetrimino(pool.getTetrimino());
-			tetrisBoard.putTetrimino(new Type4());// TODO chequear el caso en q da mal el downAvail con esta pieza
+			tetrisBoard.putTetrimino(pool.getTetrimino());
+//			tetrisBoard.putTetrimino(new Type4());// TODO chequear el caso en q da mal el downAvail con esta pieza
 
 		}
 	
@@ -42,7 +42,7 @@ public class TetrisLogic extends BaseGameLogic
 		try
 		{
 			System.out.println(tetrisBoard);
-			Thread.sleep(1000);
+			Thread.sleep(250);
 
 			tetrisBoard.stepDownTetrimino();
 			
