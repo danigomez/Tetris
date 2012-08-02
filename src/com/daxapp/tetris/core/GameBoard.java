@@ -116,58 +116,7 @@ public class GameBoard
 	private CollisionResult checkCollision()
 	{
 
-		int size = currentLayout.getLayoutSize();
-		int lRow,lCol;
-		boolean roto = false;
-		
-		CollisionResult ret = new CollisionResult();
-		//Move Collision
-		for(int i = currentRow; i < currentRow + size;i++)
-		{
-			for(int j = currentCol; j <  currentCol + size;j++)
-			{
-				lRow = i - currentRow;
-				lCol = j - currentCol;
-				if(BoardRegionHelper.isOnBoardRegion(i, j, currentRow, currentCol, size , size) 
-						&& lRow < size
-						&& currentLayout.getAtPos(lRow, lCol) != TetrisConstants.NO_DATA)
-				//(i,j) pertenecen al cuadrado del layout
-				{
-					
-					CollisionHelper.onMoveCollision(board, i, j, ret);
-					
-				}
-			
-			}
-		}
-		
-		//Rotation collision TODO Refactor
-		currentLayout.rotate();
-
-		for(int i = currentRow;!roto && i < currentRow + size;i++)
-		{
-			for(int j = currentCol;!roto && j <  currentCol + size;j++)
-			{
-				lRow = i - currentRow;
-				lCol = j - currentCol;
-				if(BoardRegionHelper.isOnBoardRegion(i, j, currentRow, currentCol, size , size) 
-						&& lRow < size
-						&& currentLayout.getAtPos(lRow, lCol) != TetrisConstants.NO_DATA)
-				//(i,j) pertenecen al cuadrado del layout
-				{
-					
-					if(board[i][j] == currentLayout.getAtPos(lRow, lCol))
-						roto = true;
-				}
-			
-			}
-		}
-		currentLayout.unrotate();
-		
-		ret.setRotatedCollision(roto);
-		System.out.println(ret);
-		return ret;
-		
+		return CollisionHelper.getAllCollisions(board, currentLayout, currentRow, currentCol);
 		
 	}
 

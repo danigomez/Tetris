@@ -15,6 +15,9 @@ public abstract class BaseGameLogic
 	
 		while(!lose)
 		{
+			//TODO agregar el tiempo de frame para tomar los inputs, en ese tiempo de frame,
+			//voy incrementando un contador, q al llegar a cierto valor x, hace el paso tipo
+			//gravedad por defecto, este paso fuera del if del frame
 			onInputEvent();
 			lose = onGameLoopUpdate();
 			onGraphicsUpdate(); //Correr en otro thread!!

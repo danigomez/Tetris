@@ -1,7 +1,6 @@
 package com.daxapp.tetris.core;
 
 import com.daxapp.tetris.constants.TetrisConstants;
-import com.daxapp.tetris.core.impl.Type4;
 import com.daxapp.tetris.pool.TetriminoPool;
 
 public class TetrisLogic extends BaseGameLogic
@@ -15,10 +14,8 @@ public class TetrisLogic extends BaseGameLogic
 		pool = new TetriminoPool();
 		tetrisBoard = new GameBoard(TetrisConstants.TETRIS_ROW,TetrisConstants.TETRIS_COL);
 
-		
 	}
 	
-
 	protected void onInputEvent()
 	{
 		
