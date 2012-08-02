@@ -27,8 +27,8 @@ public class TetrisLogic extends BaseGameLogic
 		{
 			tetrisBoard.putTetrimino(pool.getTetrimino());
 //			tetrisBoard.putTetrimino(new Type4());// TODO chequear el caso en q da mal el downAvail con esta pieza
-			
-			
+			tetrisBoard.stepDownTetrimino();
+			tetrisBoard.stepDownTetrimino();
 		}
 	
 		return false;
@@ -41,8 +41,11 @@ public class TetrisLogic extends BaseGameLogic
 		{
 			System.out.println(tetrisBoard);
 			Thread.sleep(250);
-			tetrisBoard.stepDownTetrimino();
+			//TODO Arreglar error cuando se mueve y rota, se está calculando mal el leftAvail el ritghtAvail, antes no pasaba!
+			
+			tetrisBoard.stepLeftTetrimino();
 			tetrisBoard.rotateTetrimino();
+			
 			
 			
 		} catch (Exception e)

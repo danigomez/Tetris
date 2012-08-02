@@ -1,6 +1,7 @@
 package com.daxapp.tetris.core;
 
 import com.daxapp.tetris.constants.TetrisConstants;
+import com.daxapp.tetris.core.layout.Layout;
 import com.daxapp.tetris.core.util.BoardRegionHelper;
 import com.daxapp.tetris.core.util.CollisionHelper;
 import com.daxapp.tetris.core.util.CollisionResult;
@@ -99,7 +100,7 @@ public class GameBoard
 	{
 		if(!collisionResult.isRotatedCollision())
 		{
-			currentLayout.rotate();
+			currentLayout.rotateAndUpdate();
 			currentCol += currentLayout.getColOffset();
 			currentRow += currentLayout.getRowOffset();
 			collisionResult = checkCollision();

@@ -5,6 +5,7 @@ public class Layout
 	private int[][] layout;
 	private int n;
 	
+	
 
 	public Layout(int[][] l)
 	{

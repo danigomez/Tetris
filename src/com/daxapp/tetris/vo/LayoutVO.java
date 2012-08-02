@@ -79,7 +79,7 @@ public class LayoutVO extends Layout
 		toDownAvail -= 1;
 	}
 	
-	public void rotate()
+	public void rotateAndUpdate()
 	{
 		super.rotate();
 		onRotate();

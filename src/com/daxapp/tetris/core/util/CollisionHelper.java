@@ -2,6 +2,7 @@ package com.daxapp.tetris.core.util;
 
 import com.daxapp.tetris.constants.TetrisConstants;
 import com.daxapp.tetris.core.layout.Layout;
+import com.daxapp.tetris.vo.LayoutVO;
 
 
 public class CollisionHelper
@@ -33,7 +34,7 @@ public class CollisionHelper
 			
 			}
 		}
-		
+
 		CollisionHelper.onRotateCollision(matrix, layout, rowInit, colInit,ret);
 		
 		return ret;
@@ -67,7 +68,7 @@ public class CollisionHelper
 		int lRow,lCol;
 		int size = layout.getLayoutSize();
 		boolean roto = false;
-		layout.rotate();
+		layout.rotate(); 
 
 		for(int i = rowPos;!roto && i < rowPos + size;i++)
 		{
