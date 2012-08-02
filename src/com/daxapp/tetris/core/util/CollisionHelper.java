@@ -1,17 +1,18 @@
 package com.daxapp.tetris.core.util;
 
 import com.daxapp.tetris.constants.TetrisConstants;
+import com.daxapp.tetris.core.layout.Layout;
 
 
 public class CollisionHelper
 {
-	//rowPos y colPos representan un punto en matrix, del cual se va a chequear los vecinos q tenga
-	//Si alguno de los valores de CollisionResult es true, entonces se setea algun flag en el GameBoard
-	//indicando que debe evitarse algún tipo de movimiento para el lado indicado
-	//ESTE MÉTODO INDICA SI EXISTE UNA COLISION AL MOVERSE, la colision al rotar es aparte
-	public static void collisionOnMove(int[][] matrix, int rowPos, int colPos, CollisionResult ret)
+	public static void onMoveCollision(int[][] matrix, int rowPos, int colPos, CollisionResult ret)
 	{
+		//Este método se llama por cada bloque del tetrimino al cual se quiere verificar la colisión
 		boolean right,left,down,roto;
+		
+		//Al ser llamado por cada bloque solo verifico la colisión una vez,
+		//en el caso de que se haya detectado no la vuelvo a verificar para este tetrimino
 		right = ret.isRightCollision();
 		left = ret.isLeftCollision();
 		down = ret.isDownCollision();
@@ -25,6 +26,12 @@ public class CollisionHelper
 		
 		if(!down && rowPos + 1 < TetrisConstants.TETRIS_ROW)
 			ret.setDownCollision(matrix[rowPos+1][colPos] == TetrisConstants.BLOCK);
+		
+		
+	}
 	
+	public static void onRotateCollision(Layout layout)
+	{
+		
 	}
 }

@@ -24,7 +24,6 @@ public class Layout
 	
 	public void rotate()
 	{
-		int n = getLayoutSize();
 		int [][] aux = new int[n][n];
 		for(int i = 0;i < n;i++)
 		{
@@ -38,6 +37,31 @@ public class Layout
 				//Por lo tanto la rotacion de (0,0) es (2,0) en la matriz
 				int r = -j + n - 1;
 				int c = i;
+				aux[i][j] = layout[r][c];
+				
+			}
+		}
+		
+		layout = aux;
+			
+	}
+	
+	public void unrotate()
+	{
+		int [][] aux = new int[n][n];
+		for(int i = 0;i < n;i++)
+		{
+			for(int j = 0; j < n;j++)
+			{
+				
+				//Rotacion de la forma (xr,yr) = (-y, x) + (xc,yc) 
+				//Ejemplo:
+				//(0,0) en la matriz, se centra, restando el centro de la matriz (1,1)
+				//(-1,-1) => rotado da (1,-1), sumando el centro nuevamente da (2,0) 
+				//Por lo tanto la rotacion de (0,0) es (2,0) en la matriz
+				int r = j;
+				int c = -i + n - 1;
+				
 				aux[i][j] = layout[r][c];
 				
 			}

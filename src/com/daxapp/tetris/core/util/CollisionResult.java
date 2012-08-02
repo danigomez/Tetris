@@ -61,9 +61,10 @@ public class CollisionResult
 	{
 		String ret = "";
 		
-		ret += "RIGHT COLLISION -> " + onRightCollision + " ";
-		ret +="LEFT COLLISION -> " + onLeftCollision + " ";
-		ret +="DOWN COLLISION -> " + onDownCollision;
+		ret += "RIGHT COLLISION -> " + onRightCollision + "\n";
+		ret +="LEFT COLLISION -> " + onLeftCollision + "\n";
+		ret +="DOWN COLLISION -> " + onDownCollision + "\n";
+		ret +="ROTO COLLISION -> " + onRotateCollision;
 		
 		return ret;
 	}

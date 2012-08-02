@@ -8,6 +8,8 @@ import com.daxapp.tetris.vo.LayoutVO;
 
 public class GameBoard
 {
+	//TODO Agregar la clase TetriminoUpdateHandler, y q el GameBoard llame a sus métodos,
+	//se va a encargar de manipular todo el movimiento del tetrimino(REFACTOR)
 	private int[][] board;
 	private int row;
 	private int col;
@@ -92,30 +94,34 @@ public class GameBoard
 		}
 			
 	}
+	
+	public void rotateTetrimino()
+	{
+		if(!collisionResult.isRotatedCollision())
+		{
+			currentLayout.rotate();
+			currentCol += currentLayout.getColOffset();
+			currentRow += currentLayout.getRowOffset();
+			collisionResult = checkCollision();
+		}
+	}
 
 	public boolean isTetriminoAlive()
 	{
 		return !tetriminoDead && currentRow != 0;
 	}
 	
-	public void rotateTetrimino()
-	{
-		currentLayout.rotate();
-		currentCol += currentLayout.getColOffset();
-		currentRow += currentLayout.getRowOffset();
-	}
+	
 	
 	private CollisionResult checkCollision()
 	{
-		//TODO Verificar cuando un tetrimino tiene bloques q puedes impedir su camino, es decir,
-		//por cada bloque del tetrmino, verifico si algo bloquea su mov, es decir dentro del area q ocupe
-		// el tetrimino, verifico si lo bloquea y si se quiere hacer un movimiento más,
-		//lo pongo como dead y lo seteo en el tablero
+
 		int size = currentLayout.getLayoutSize();
 		int lRow,lCol;
+		boolean roto = false;
 		
 		CollisionResult ret = new CollisionResult();
-		
+		//Move Collision
 		for(int i = currentRow; i < currentRow + size;i++)
 		{
 			for(int j = currentCol; j <  currentCol + size;j++)
@@ -128,12 +134,37 @@ public class GameBoard
 				//(i,j) pertenecen al cuadrado del layout
 				{
 					
-					CollisionHelper.collisionOnMove(board, i, j, ret);
+					CollisionHelper.onMoveCollision(board, i, j, ret);
 					
 				}
 			
 			}
 		}
+		
+		//Rotation collision TODO Refactor
+		currentLayout.rotate();
+
+		for(int i = currentRow;!roto && i < currentRow + size;i++)
+		{
+			for(int j = currentCol;!roto && j <  currentCol + size;j++)
+			{
+				lRow = i - currentRow;
+				lCol = j - currentCol;
+				if(BoardRegionHelper.isOnBoardRegion(i, j, currentRow, currentCol, size , size) 
+						&& lRow < size
+						&& currentLayout.getAtPos(lRow, lCol) != TetrisConstants.NO_DATA)
+				//(i,j) pertenecen al cuadrado del layout
+				{
+					
+					if(board[i][j] == currentLayout.getAtPos(lRow, lCol))
+						roto = true;
+				}
+			
+			}
+		}
+		currentLayout.unrotate();
+		
+		ret.setRotatedCollision(roto);
 		System.out.println(ret);
 		return ret;
 		
