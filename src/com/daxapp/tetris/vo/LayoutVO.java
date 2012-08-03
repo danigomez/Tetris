@@ -85,6 +85,7 @@ public class LayoutVO extends Layout
 		onRotate();
 
 	}
+
 	
 	private void onRotate()
 	{

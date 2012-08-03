@@ -2,7 +2,6 @@ package com.daxapp.tetris.core.util;
 
 import com.daxapp.tetris.constants.TetrisConstants;
 import com.daxapp.tetris.core.layout.Layout;
-import com.daxapp.tetris.vo.LayoutVO;
 
 
 public class CollisionHelper
@@ -12,7 +11,6 @@ public class CollisionHelper
 	{
 		int size = layout.getLayoutSize();
 		int lRow,lCol;
-		
 		
 		CollisionResult ret = new CollisionResult();
 		//Move Collision
@@ -35,7 +33,10 @@ public class CollisionHelper
 			}
 		}
 
+		
 		CollisionHelper.onRotateCollision(matrix, layout, rowInit, colInit,ret);
+		//La excepción era generada porque cuando rotaba y se pasaba de los límites chequeaba las colisiones antes
+		//de que el fix de col sea seteado!
 		
 		return ret;
 	}
@@ -65,14 +66,23 @@ public class CollisionHelper
 	
 	private static void onRotateCollision(int[][] matrix, Layout layout, int rowPos, int colPos, CollisionResult ret)
 	{
+		
 		int lRow,lCol;
 		int size = layout.getLayoutSize();
 		boolean roto = false;
+		
+		if(rowPos < 0)
+			rowPos = 0;
+
+		if(colPos < 0)
+			colPos = 0;
+		
 		layout.rotate(); 
 
-		for(int i = rowPos;!roto && i < rowPos + size;i++)
+		//Si las filas/columnas están dentro de los limites del tablero y del área de la pieza
+		for(int i = rowPos;!roto && i < TetrisConstants.TETRIS_ROW && i < rowPos + size;i++)
 		{
-			for(int j = colPos;!roto && j <  colPos + size;j++)
+			for(int j = colPos;!roto && j < TetrisConstants.TETRIS_COL && j < colPos + size;j++)
 			{
 				lRow = i - rowPos;
 				lCol = j - colPos;
@@ -90,5 +100,6 @@ public class CollisionHelper
 		}
 		ret.setRotatedCollision(roto);
 		layout.unrotate();
+
 	}
 }

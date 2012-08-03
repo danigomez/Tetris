@@ -1,5 +1,7 @@
 package com.daxapp.tetris.core.util;
 
+import com.daxapp.tetris.constants.TetrisConstants;
+
 
 public class BoardRegionHelper
 {
@@ -11,5 +13,13 @@ public class BoardRegionHelper
 		   	   (currentCol >= colInit && currentCol < colInit + colMax);
 	}
 
-	
+	public static int boundingColRestore(int col)
+	{
+		if(col < 0)
+			col = 0;
+		if(col >= TetrisConstants.TETRIS_COL - 1)
+			col = TetrisConstants.TETRIS_COL - 1;
+		
+		return col;
+	}
 }

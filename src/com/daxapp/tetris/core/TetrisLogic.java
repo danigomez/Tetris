@@ -1,6 +1,7 @@
 package com.daxapp.tetris.core;
 
 import com.daxapp.tetris.constants.TetrisConstants;
+import com.daxapp.tetris.core.impl.Type4;
 import com.daxapp.tetris.pool.TetriminoPool;
 
 public class TetrisLogic extends BaseGameLogic
@@ -26,9 +27,8 @@ public class TetrisLogic extends BaseGameLogic
 		if(!tetrisBoard.isTetriminoAlive())
 		{
 			tetrisBoard.putTetrimino(pool.getTetrimino());
-//			tetrisBoard.putTetrimino(new Type4());// TODO chequear el caso en q da mal el downAvail con esta pieza
-			tetrisBoard.stepDownTetrimino();
-			tetrisBoard.stepDownTetrimino();
+			//tetrisBoard.putTetrimino(new Type4());
+			
 		}
 	
 		return false;
@@ -43,7 +43,8 @@ public class TetrisLogic extends BaseGameLogic
 			Thread.sleep(250);
 			//TODO Arreglar error cuando se mueve y rota, se está calculando mal el leftAvail el ritghtAvail, antes no pasaba!
 			
-			tetrisBoard.stepLeftTetrimino();
+			tetrisBoard.stepRightTetrimino();
+			tetrisBoard.stepDownTetrimino();
 			tetrisBoard.rotateTetrimino();
 			
 			
