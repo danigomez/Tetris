@@ -26,8 +26,8 @@ public class TetrisLogic extends BaseGameLogic
 	{
 		if(!tetrisBoard.isTetriminoAlive())
 		{
-			tetrisBoard.putTetrimino(pool.getTetrimino());
-			//tetrisBoard.putTetrimino(new Type4());
+//			tetrisBoard.putTetrimino(pool.getTetrimino());
+			tetrisBoard.putTetrimino(new Type4());
 			
 		}
 	
