@@ -33,6 +33,14 @@ public class GameBoard
 		                                          
 	}
 	
+	public int cleanFullLines()
+	{
+		//TODO chequea las lineas que están como completas y las elimina del tablero...
+		//retorna la cantidad de lineas eliminadas(para poder calcular el puntaje)
+		
+		return 0;
+	}
+	
 	private void setZero()
 	{
 		for(int i = 0; i < row;i++)

@@ -99,6 +99,7 @@ public class TetrisLogic extends BaseGameLogic
 	{
 		TetrisLogic tet = new TetrisLogic();
 		tet.setVisible(true);
+		tet.setFocusable(true);
 		tet.Game();
 		
 	}
