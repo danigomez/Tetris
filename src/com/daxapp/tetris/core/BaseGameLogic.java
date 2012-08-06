@@ -1,5 +1,7 @@
 package com.daxapp.tetris.core;
 
+
+
 public abstract class BaseGameLogic
 {
 	protected abstract void onCreateResources();
@@ -7,21 +9,34 @@ public abstract class BaseGameLogic
 	protected abstract boolean onGameLoopUpdate(); 
 	protected abstract void onGraphicsUpdate(); //En un Thread diferente!! (TODO de momento de puede obviar)!
 	protected abstract void onSoundPlay();
+	protected abstract int getFPS();
+	
+	protected void auxiliarProc()
+	{
+		//Método para procesamiento auxiliar s
+	}
 	
 	public void Game()
 	{
 		boolean lose = false;
-		onCreateResources();
+		int fps = getFPS();
+		long frametime = 1000/fps;
+		long start = System.currentTimeMillis(); //Tiempo inicial para conteo de frame
+	
+		onCreateResources(); //Cargo los recursos necesarios para el juego
 	
 		while(!lose)
 		{
-			//TODO agregar el tiempo de frame para tomar los inputs, en ese tiempo de frame,
-			//voy incrementando un contador, q al llegar a cierto valor x, hace el paso tipo
-			//gravedad por defecto, este paso fuera del if del frame
-			onInputEvent();
-			lose = onGameLoopUpdate();
-			onGraphicsUpdate(); //Correr en otro thread!!
-			onSoundPlay();
+			auxiliarProc();
+			if(System.currentTimeMillis() - start >= frametime)
+			{
+				onInputEvent();
+				lose = onGameLoopUpdate();
+				onGraphicsUpdate(); //Correr en otro thread!!
+				onSoundPlay();
+				
+				start = System.currentTimeMillis();
+			}
 		}
 	}
 

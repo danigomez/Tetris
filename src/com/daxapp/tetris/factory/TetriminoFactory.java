@@ -6,9 +6,11 @@ import com.daxapp.tetris.core.Tetrimino;
 
 public class TetriminoFactory
 {
+	private static ResourceBundle bundle;
 	public static Tetrimino createTetriminoByType(int type)
 	{
-		ResourceBundle bundle = ResourceBundle.getBundle("resources/tetramines");
+		if(bundle == null)
+			bundle = ResourceBundle.getBundle("resources/tetramines");
 		
 		Tetrimino ret;
 		try

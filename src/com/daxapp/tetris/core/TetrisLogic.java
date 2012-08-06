@@ -1,22 +1,38 @@
 package com.daxapp.tetris.core;
 
 import com.daxapp.tetris.constants.TetrisConstants;
-import com.daxapp.tetris.core.impl.Type4;
 import com.daxapp.tetris.pool.TetriminoPool;
 
 public class TetrisLogic extends BaseGameLogic
 {
 	private GameBoard tetrisBoard;
 	private TetriminoPool pool;
+	private int gravityStepCounter;
 
+	protected int getFPS()
+	{
+		return TetrisConstants.FPS;
+	}
 	
 	protected void onCreateResources()
 	{
 		pool = new TetriminoPool();
 		tetrisBoard = new GameBoard(TetrisConstants.TETRIS_ROW,TetrisConstants.TETRIS_COL);
+		gravityStepCounter = 0;
 
 	}
 	
+	
+	protected void auxiliarProc()
+	{
+		if(gravityStepCounter == TetrisConstants.HOLD_TIME_TO_STEP)
+		{
+			tetrisBoard.stepDownTetrimino();
+			gravityStepCounter = 0;
+		}
+		
+	}
+
 	protected void onInputEvent()
 	{
 		
@@ -24,13 +40,12 @@ public class TetrisLogic extends BaseGameLogic
 
 	protected boolean onGameLoopUpdate()
 	{
-		if(!tetrisBoard.isTetriminoAlive())
+		if(!tetrisBoard.isTetriminoAlive() && gravityStepCounter == 0)
 		{
-//			tetrisBoard.putTetrimino(pool.getTetrimino());
-			tetrisBoard.putTetrimino(new Type4());
+			tetrisBoard.putTetrimino(pool.getTetrimino());
 			
 		}
-	
+		gravityStepCounter++;
 		return false;
 		
 	}
@@ -39,16 +54,8 @@ public class TetrisLogic extends BaseGameLogic
 	{
 		try
 		{
-			System.out.println(tetrisBoard);
-			Thread.sleep(250);
-			//TODO Arreglar error cuando se mueve y rota, se está calculando mal el leftAvail el ritghtAvail, antes no pasaba!
-			
-			tetrisBoard.stepRightTetrimino();
-			tetrisBoard.stepDownTetrimino();
-			tetrisBoard.rotateTetrimino();
-			
-			
-			
+			System.out.println(tetrisBoard);			
+
 		} catch (Exception e)
 		{
 			e.printStackTrace();
@@ -66,6 +73,7 @@ public class TetrisLogic extends BaseGameLogic
 		TetrisLogic tet = new TetrisLogic();
 		tet.Game();
 	}
+
 	
 	
 }
