@@ -9,21 +9,24 @@ public class InputHandler implements KeyListener
 	public void keyPressed(KeyEvent event)
 	{
 		keyCode = event.getKeyCode();
+
 	}
 
 	public void keyReleased(KeyEvent event)
 	{
-	
+
 	}
 
 	public void keyTyped(KeyEvent event)
 	{
-	
+		
 	}
 	
 	public int getKeyPressed()
 	{
-		return keyCode;
+		int aux = keyCode;
+		keyCode = -1;
+		return aux;
 	}
 
 }
