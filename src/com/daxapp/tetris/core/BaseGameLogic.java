@@ -1,8 +1,10 @@
 package com.daxapp.tetris.core;
 
+import javax.swing.JFrame;
 
 
-public abstract class BaseGameLogic
+
+public abstract class BaseGameLogic extends JFrame
 {
 	protected abstract void onCreateResources();
 	protected abstract void onInputEvent();
@@ -13,7 +15,7 @@ public abstract class BaseGameLogic
 	
 	protected void auxiliarProc()
 	{
-		//Método para procesamiento auxiliar s
+		//Método para procesamiento auxiliar 
 	}
 	
 	public void Game()
