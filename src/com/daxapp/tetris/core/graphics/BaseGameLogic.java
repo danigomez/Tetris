@@ -7,7 +7,7 @@ public abstract class BaseGameLogic extends GraphicsInterface
 	protected abstract void onCreateResources();
 	protected abstract void onInputEvent();
 	protected abstract boolean onGameLoopUpdate(); 
-	protected abstract void onGraphicsUpdate(); //En un Thread diferente!! (TODO de momento de puede obviar)!
+	protected abstract void onGraphicsUpdate();
 	protected abstract void onSoundPlay();
 	
 	protected void auxiliarProc()

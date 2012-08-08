@@ -8,7 +8,6 @@ import com.daxapp.tetris.pool.TetriminoPool;
 
 public class TetrisLogic extends BaseGameLogic
 {
-	//TODO arrancar la parte grafica con Canvas, luego veo otra! :D
 	private GameBoard tetrisBoard;
 	private TetriminoPool pool;
 	
@@ -20,8 +19,6 @@ public class TetrisLogic extends BaseGameLogic
 		tetrisBoard = new GameBoard(TetrisConstants.TETRIS_ROW,TetrisConstants.TETRIS_COL);
 		
 		gravityStepCounter = 0;
-	 //TODO hacer una ventana Swing + Canvas para mostrar el tetris!!
-
 	}
 	
 	protected void auxiliarProc()
