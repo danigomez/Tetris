@@ -8,19 +8,15 @@ import com.daxapp.tetris.vo.LayoutVO;
 
 public class GameBoard
 {
-	//TODO Agregar la clase TetriminoUpdateHandler, y q el GameBoard llame a sus métodos,
-	//se va a encargar de manipular todo el movimiento del tetrimino(REFACTOR)
 	private int[][] board;
 	private int row;
 	private int col;
 	private int currentCol;
 	private int currentRow;
+	private boolean tetriminoDead = false;
 	
 	private LayoutVO currentLayout;
-
 	private CollisionResult collisionResult;
-	
-	private boolean tetriminoDead = false;
 	
 	
 	public GameBoard(int row, int col)
@@ -33,19 +29,11 @@ public class GameBoard
 		                                          
 	}
 	
-	public int cleanFullLines()
-	{
-		//TODO chequea las lineas que están como completas y las elimina del tablero...
-		//retorna la cantidad de lineas eliminadas(para poder calcular el puntaje)
-		
-		return 0;
-	}
-	
+	//Setea en 0 todo el tablero
 	private void setZero()
 	{
 		for(int i = 0; i < row;i++)
 		{
-			
 			for(int j = 0; j < col;j++)
 			{
 				board[i][j] = TetrisConstants.NO_DATA;
@@ -53,6 +41,7 @@ public class GameBoard
 		}
 	}
 
+	//Coloca en juego un nuevo tetrimino
 	public void putTetrimino(Tetrimino tetrimino)
 	{
 		tetriminoDead = false;
@@ -64,6 +53,8 @@ public class GameBoard
 
 	}
 	
+	//Mueve hacia abajo al tetrimino, chequeando si existen colisiones o si tiene
+	//movimientos disponibles
 	public void stepDownTetrimino()
 	{
 		
@@ -77,10 +68,12 @@ public class GameBoard
 		{
 			tetriminoDead = true;
 			putOnBoard();
+			cleanFullLines();
 		}
 		
 	}
 
+	
 	public void stepRightTetrimino()
 	{
 		if(currentLayout.hasRightAvail() && !collisionResult.isRightCollision())
@@ -91,6 +84,7 @@ public class GameBoard
 		}
 			
 	}
+	
 	
 	public void stepLeftTetrimino()
 	{
@@ -103,6 +97,7 @@ public class GameBoard
 			
 	}
 	
+	
 	public void rotateTetrimino()
 	{
 		if(!collisionResult.isRotatedCollision())
@@ -114,21 +109,37 @@ public class GameBoard
 		}
 	}
 
+	//Si el tetrimino no está muerto(no esta en el fondo o parado por otro tetrimino)
+	//y la fila actual != 0, o sea, está en juego, entonces está vivo
 	public boolean isTetriminoAlive()
 	{
 		return !tetriminoDead && currentRow != 0;
 	}
 	
-	
-	
+	//Retorna las colisiones a izquierda,derecha y abajo del tetrimino en juego
 	private CollisionResult checkCollision()
 	{
-
 		return CollisionHelper.getAllCollisions(board, currentLayout, currentRow, currentCol);
-		
 	}
-
-
+	
+	//Limpia las filas que tengan todos sus valores en BLOCK
+	public int cleanFullLines()
+	{
+		int clearedLines = 0;
+		
+		for(int i = TetrisConstants.TETRIS_ROW-1; i >= 0;i--)
+		{
+			if(isFullRow(i))
+			{
+				stepDownRow(i);
+				clearedLines++;
+			}
+		}
+		
+		return clearedLines;
+	}
+	
+	
 	public String toString()
 	{
 		String ret = "";
@@ -169,6 +180,29 @@ public class GameBoard
 	}
 	
 	
+	private void stepDownRow(int row)
+	{
+		for(int i = row - 1; i >= 0;i--)
+		{
+			for(int j = 0; j < TetrisConstants.TETRIS_COL;j++)
+			{
+				board[i+1][j] = board[i][j];
+			}
+		}
+	}
+	
+	
+	private boolean isFullRow(int row)
+	{
+		for(int i = 0;i < TetrisConstants.TETRIS_COL;i++)
+		{
+			if(board[row][i] == TetrisConstants.NO_DATA)
+				return false;
+		}
+		return true;
+	}
+	
+	
 	private void putOnBoard()
 	{
 		int size = currentLayout.getLayoutSize();
@@ -193,5 +227,4 @@ public class GameBoard
 			
 		}
 	}
-
 }
