@@ -49,7 +49,7 @@ public class GameBoard
 		int layoutSize = currentLayout.getLayoutSize();
 		currentCol = (TetrisConstants.TETRIS_COL - layoutSize)/2; //Obtengo la posicion centrada del tetrimino
 		currentRow = 0;
-		collisionResult = new CollisionResult();
+		collisionResult = checkCollision();
 
 	}
 	
@@ -139,6 +139,10 @@ public class GameBoard
 		return clearedLines;
 	}
 	
+	public boolean isDefeated()
+	{
+		return currentRow == 0 && collisionResult.isDownCollision();
+	}
 	
 	public String toString()
 	{
@@ -227,4 +231,5 @@ public class GameBoard
 			
 		}
 	}
+
 }

@@ -63,7 +63,7 @@ public class TetrisLogic extends BaseGameLogic
 			
 		}
 		gravityStepCounter++;
-		return false;
+		return tetrisBoard.isDefeated();
 		
 	}
 
