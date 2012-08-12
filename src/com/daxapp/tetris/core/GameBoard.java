@@ -26,6 +26,7 @@ public class GameBoard
 		
 		board = new int[row][col];
 		setZero();
+		
 		                                          
 	}
 	
@@ -113,7 +114,7 @@ public class GameBoard
 	//y la fila actual != 0, o sea, está en juego, entonces está vivo
 	public boolean isTetriminoAlive()
 	{
-		return !tetriminoDead && currentRow != 0;
+		return !tetriminoDead;
 	}
 	
 	//Retorna las colisiones a izquierda,derecha y abajo del tetrimino en juego

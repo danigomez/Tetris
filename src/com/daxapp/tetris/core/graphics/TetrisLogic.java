@@ -18,7 +18,8 @@ public class TetrisLogic extends BaseGameLogic
 	{
 		pool = new TetriminoPool();
 		tetrisBoard = new GameBoard(TetrisConstants.TETRIS_ROW,TetrisConstants.TETRIS_COL);
-		
+		tetrisBoard.putTetrimino(pool.getTetrimino()); //Para evitar excepciones al estar el tablero vacio al iniciar el juego
+
 		gravityStepCounter = 0;
 	}
 	
@@ -35,30 +36,32 @@ public class TetrisLogic extends BaseGameLogic
 	protected void onInputEvent()
 	{
 		//TODO Que las teclas y sus acciones se levanten del archivo de configuracion
-		switch(handler.getKeyPressed())
-		{
-			case KeyEvent.VK_UP:
-				tetrisBoard.rotateTetrimino();
-				break;
-				
-			case KeyEvent.VK_LEFT:
-				tetrisBoard.stepLeftTetrimino();
-				break;
-				
-			case KeyEvent.VK_RIGHT:
-				tetrisBoard.stepRightTetrimino();
-				break;
-				
-			case KeyEvent.VK_DOWN:
-				tetrisBoard.stepDownTetrimino();
-				break;
-				
-		}
+		
+			switch(handler.getKeyPressed())
+			{
+				case KeyEvent.VK_UP:
+					tetrisBoard.rotateTetrimino();
+					break;
+					
+				case KeyEvent.VK_LEFT:
+					tetrisBoard.stepLeftTetrimino();
+					break;
+					
+				case KeyEvent.VK_RIGHT:
+					tetrisBoard.stepRightTetrimino();
+					break;
+					
+				case KeyEvent.VK_DOWN:
+					tetrisBoard.stepDownTetrimino();
+					break;
+					
+			}
+		
 	}
 
 	protected boolean onGameLoopUpdate()
 	{
-		if(!tetrisBoard.isTetriminoAlive() && gravityStepCounter == 0)
+		if(!tetrisBoard.isTetriminoAlive())
 		{
 			tetrisBoard.putTetrimino(pool.getTetrimino());
 			

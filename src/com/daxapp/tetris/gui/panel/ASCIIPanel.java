@@ -14,7 +14,7 @@ public class ASCIIPanel extends TetrisPanel
 		
 		int i = (TetrisConstants.TETRIS_COL*fontSize - (int) this.getSize().getWidth())/2 + 25;
 		int j = 45;
-		
+
 		for(String row : toDraw.split("\n"))
 		{
 			g.drawString(row + "\n",i,j);
