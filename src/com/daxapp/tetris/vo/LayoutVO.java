@@ -60,6 +60,7 @@ public class LayoutVO extends Layout
 		return avail(toDownAvail);
 	}
 	
+	//Actualiza la cantidad de movimientos resantes hacia los lados
 	public void onMoveRight()
 	{
 		toRigthAvail -= 1;
@@ -67,6 +68,7 @@ public class LayoutVO extends Layout
 	
 	}
 	
+	//Actualiza la cantidad de movimientos resantes hacia los lados
 	public void onMoveLeft()
 	{
 		toRigthAvail += 1;
@@ -74,11 +76,13 @@ public class LayoutVO extends Layout
 
 	}
 	
+	//Actualiza la cantidad de movimientos restantes hacia abajo
 	public void onMoveDown()
 	{
 		toDownAvail -= 1;
 	}
 	
+	//Rota el layout del tetrimino 
 	public void rotateAndUpdate()
 	{
 		super.rotate();
@@ -86,7 +90,7 @@ public class LayoutVO extends Layout
 
 	}
 
-	
+	//Actualiza los movimientos disponibles hacia los lados y hacia abajo al rotarse
 	private void onRotate()
 	{
 		int lBias = LayoutDrawHelper.getLeftBias(this);
@@ -105,6 +109,7 @@ public class LayoutVO extends Layout
 	    colOffset = fixOutCol();
 	}
 	
+	//Retorna la cantidad de filas que el tetrimino se salió del tablero al rotar(si se salio)
 	private int fixOutRow()
 	{
 		int ret = 0;
@@ -118,6 +123,7 @@ public class LayoutVO extends Layout
 		return ret;
 	}
 	
+	//Retorna la cantidad de columnas que el tetrimino se salió del tablero al rotar(si se salio)
 	private int fixOutCol()
 	{
 		int ret = 0;

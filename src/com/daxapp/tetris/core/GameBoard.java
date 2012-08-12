@@ -126,8 +126,7 @@ public class GameBoard
 	public int cleanFullLines()
 	{
 		int clearedLines = 0;
-		
-		for(int i = TetrisConstants.TETRIS_ROW-1; i >= 0;i--)
+		for(int i = 0; i < TetrisConstants.TETRIS_ROW;i++)
 		{
 			if(isFullRow(i))
 			{
