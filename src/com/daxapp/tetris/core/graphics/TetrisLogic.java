@@ -36,7 +36,8 @@ public class TetrisLogic extends BaseGameLogic
 	protected void onInputEvent()
 	{
 		//TODO Que las teclas y sus acciones se levanten del archivo de configuracion
-		
+		if(tetrisBoard.isTetriminoAlive())
+		{
 			switch(handler.getKeyPressed())
 			{
 				case KeyEvent.VK_UP:
@@ -56,7 +57,7 @@ public class TetrisLogic extends BaseGameLogic
 					break;
 					
 			}
-		
+		}
 	}
 
 	protected boolean onGameLoopUpdate()
