@@ -6,6 +6,7 @@ import com.daxapp.tetris.constants.TetrisConstants;
 import com.daxapp.tetris.core.GameBoard;
 import com.daxapp.tetris.pool.TetriminoPool;
 
+@SuppressWarnings("serial")
 public class TetrisLogic extends BaseGameLogic
 {
 	private GameBoard tetrisBoard;
@@ -70,14 +71,8 @@ public class TetrisLogic extends BaseGameLogic
 	protected void onGraphicsUpdate()
 	//TODO Nota: este método va a dejar de existir cuando se integre el core con Canvas
 	{
-		try
-		{
-			System.out.println(tetrisBoard);			
-
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		panel.setToDraw(tetrisBoard.toString());
+		panel.updateUI();
 	
 	}
 
@@ -90,6 +85,6 @@ public class TetrisLogic extends BaseGameLogic
 	{
 		TetrisLogic tet = new TetrisLogic();
 		tet.Game();
-		
+
 	}
 }

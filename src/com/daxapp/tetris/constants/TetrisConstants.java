@@ -2,6 +2,7 @@ package com.daxapp.tetris.constants;
 
 import com.daxapp.tetris.core.util.ResourcesLoaderHelper;
 
+
 public interface TetrisConstants
 {
 	public static final int TETRAMINE_TYPES = 7; //Indica la candidad de tipos de tetraminos q pueden ser generados

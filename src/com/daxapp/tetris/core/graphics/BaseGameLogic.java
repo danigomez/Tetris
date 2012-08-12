@@ -1,7 +1,9 @@
 package com.daxapp.tetris.core.graphics;
 
 import com.daxapp.tetris.constants.TetrisConstants;
+import com.daxapp.tetris.gui.GraphicsInterface;
 
+@SuppressWarnings("serial")
 public abstract class BaseGameLogic extends GraphicsInterface
 {
 	protected abstract void onCreateResources();
