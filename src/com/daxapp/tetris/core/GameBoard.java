@@ -55,7 +55,8 @@ public class GameBoard
 	}
 	
 	//Mueve hacia abajo al tetrimino, chequeando si existen colisiones o si tiene
-	//movimientos disponibles
+	//movimientos disponibles, de no ser posible ninguna de las dos cosas, significa
+	//que el tetrimino está dead! muajaja(?
 	public void stepDownTetrimino()
 	{
 		
@@ -69,7 +70,6 @@ public class GameBoard
 		{
 			tetriminoDead = true;
 			putOnBoard();
-			cleanFullLines();
 		}
 		
 	}

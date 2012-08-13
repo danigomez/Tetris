@@ -14,5 +14,6 @@ public interface TetrisConstants
 	public static final int FPS = Integer.parseInt(ResourcesLoaderHelper.loadResourcesById("FPS"));
 	public static final int HOLD_TIME_TO_STEP = Integer.parseInt(ResourcesLoaderHelper.loadResourcesById("HOLD_TIME_TO_STEP"));
 	// Cuantos frames hay q esperar para q baje un paso por gravedad
+	public static final int LINES_PER_LEVEL = 1;
 	
 }
