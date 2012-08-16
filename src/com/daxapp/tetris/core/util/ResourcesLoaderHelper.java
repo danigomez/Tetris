@@ -10,19 +10,33 @@ public class ResourcesLoaderHelper
 	
 	public static String loadResourcesById(String id)
 	{
-		return loadResource(id,cfgBundle,"resources/configuration/config");
+		return (String)loadResource(id,cfgBundle,"resources/configuration/config",false);
+	}
+	
+	public static Object loadInstanceById(String id)
+	{
+		return loadResource(id,cfgBundle,"resources/configuration/config",true);
 	}
 	 
 	public static String loadPhraseById(String id)
 	{
-		return loadResource(id,phraseBundle,"resources/phrases/phrases");
+		return (String)loadResource(id,phraseBundle,"resources/phrases/phrases",false);
 	}
 	
-	private static String loadResource(String id,ResourceBundle bundle,String bundleName)
+	private static Object loadResource(String id,ResourceBundle bundle,String bundleName,boolean instantiate)
 	{
 		if(bundle == null)
 			bundle = ResourceBundle.getBundle(bundleName);
-		
+		if(instantiate)
+		{
+			try
+			{
+				return Class.forName(bundle.getString(id)).newInstance();
+			} catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
 		return bundle.getString(id);
 	}
 }

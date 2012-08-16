@@ -89,8 +89,8 @@ public class TetrisLogic extends BaseGameLogic
 
 	protected void onGraphicsUpdate()
 	{
-		panel.setToDraw(tetrisBoard.toString());
-		panel.updateUI();
+		boardPanel.setToDraw(tetrisBoard.toString());
+		boardPanel.updateUI();
 		System.out.println(points);
 	
 	}
