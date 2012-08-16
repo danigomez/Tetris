@@ -39,6 +39,7 @@ public abstract class BaseGameLogic extends GraphicsInterface
 				start = System.currentTimeMillis();
 			}
 		}
+
 	}
 	
 	

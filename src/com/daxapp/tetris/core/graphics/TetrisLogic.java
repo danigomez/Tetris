@@ -15,7 +15,8 @@ public class TetrisLogic extends BaseGameLogic
 	private int framesToStep;
 	private int points;
 	private int gravityStepCounter;
-	//private int level;
+	private int level;
+	private int totalLines;
 	
 	protected void onCreateResources()
 	{
@@ -24,8 +25,9 @@ public class TetrisLogic extends BaseGameLogic
 		tetrisBoard.putTetrimino(pool.getTetrimino()); //Para evitar excepciones al estar el tablero vacio al iniciar el juego
 		framesToStep = TetrisConstants.HOLD_TIME_TO_STEP;//Tiempo de espera inicial para la dificultad más baja
 		
-		//level = 1; //TODO que se pueda elegir en que nivel empezar
+		level = 0; //TODO que se pueda elegir en que nivel empezar
 		points = 0;
+		totalLines = 0;
 		gravityStepCounter = 0;
 		
 	}
@@ -69,14 +71,18 @@ public class TetrisLogic extends BaseGameLogic
 
 	protected boolean onGameLoopUpdate()
 	{
+		int lines;
+		//TODO contar el tiempo que se tarda en colocar una pieza para aumentar el puntaje según eso!
 		if(!tetrisBoard.isTetriminoAlive())
 		{
-			tetrisBoard.cleanFullLines();//TODO tomar la cantidad de líneas limpiadas para saber cuando cambiar de nivel!
-										 //Chequear porque parece qu al cambiar mucho de nivel, loopea algo. revisarrrr!
+			lines = tetrisBoard.cleanFullLines();
+			totalLines += lines;
+			points += updatePoints(lines);	
+			level = updateLevel(totalLines);
 			tetrisBoard.putTetrimino(pool.getTetrimino());
 			
 		}
-		gravityStepCounter++;
+		gravityStepCounter++; //Incremento en 1 el conteo de frames antes del paso por gravedad...
 		return tetrisBoard.isDefeated();
 		
 	}
@@ -85,12 +91,39 @@ public class TetrisLogic extends BaseGameLogic
 	{
 		panel.setToDraw(tetrisBoard.toString());
 		panel.updateUI();
+		System.out.println(points);
 	
 	}
 
 	protected void onSoundPlay()
 	{
 	
+	}
+	
+	private int updatePoints(int lines)
+	{
+		switch(lines)
+		{
+			case 4:
+				return TetrisConstants.TETRIS + TetrisConstants.TETRIS*level;
+			case 3:
+				return TetrisConstants.TRIPlE + TetrisConstants.TRIPlE*level;
+			case 2:
+				return TetrisConstants.DOBLE + TetrisConstants.DOBLE*level;
+			case 1: 
+				return TetrisConstants.SIMPLE + TetrisConstants.SIMPLE*level;
+			default:
+				return 0;
+ 		}
+	}
+	
+	private int updateLevel(int lines)
+	{
+		int ret = lines / TetrisConstants.LINES_PER_LEVEL;//Obtengo el nuevo nivel
+
+		if(ret > level)
+			framesToStep -= TetrisConstants.HOLD_TIME_DECREMENT;
+		return ret;
 	}
 
 	public static void main(String[] args)
