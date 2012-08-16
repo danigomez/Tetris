@@ -16,7 +16,7 @@ public class GraphicsInterface extends JFrame
 	//TODO este valor se toma de un menu dentro de la ventana
 	//el valor que tiene es solo para prueba
 	
-	
+	//TODO agregar un label con el puntaje y el nivel actual, separado del panel de dibujo del tablero
 	public GraphicsInterface()
 	{
 		handler = new InputHandler();
