@@ -49,9 +49,9 @@ public class TetrisPanel extends JPanel
 		super.paint(g);
 		
 		g.setFont(g.getFont().deriveFont(20f));
-
-		g.drawString("Puntos:" + points +"\n\n", 250, 45);
-		g.drawString("Nivel:" + level +"\n\n", 250, 65);
+		//Imprimo la info del juego actual!
+		g.drawString("Puntos:" + points +"\n", 250, 45);
+		g.drawString("Nivel:" + level +"\n", 250, 65);
 		g.drawString("Lineas:" + lines , 250, 85);
 	}
 	

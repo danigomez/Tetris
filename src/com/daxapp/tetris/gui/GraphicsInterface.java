@@ -16,8 +16,7 @@ public class GraphicsInterface extends JFrame
 	protected String selectedPanel = "ASCII";
 	//TODO este valor se toma de un menu dentro de la ventana
 	//el valor que tiene es solo para prueba
-	
-	//TODO agregar un label con el puntaje y el nivel actual, separado del panel de dibujo del tablero
+
 	public GraphicsInterface()
 	{
 		handler = new InputHandler();
@@ -27,12 +26,11 @@ public class GraphicsInterface extends JFrame
 		this.setTitle(ResourcesLoaderHelper.loadPhraseById("APP_TITLE") + " " + ResourcesLoaderHelper.loadPhraseById("APP_VERSION"));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(boardPanel);
-//		this.add(pointsPanel);
 		
 		this.pack();
 		this.setVisible(true);
 		this.setFocusable(true);
-//		this.setResizable(false);
+		this.setResizable(false);
 
 		
 	}

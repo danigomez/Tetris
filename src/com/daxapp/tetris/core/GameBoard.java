@@ -166,12 +166,16 @@ public class GameBoard
 						&& (toDraw = currentLayout.getAtPos(lRow, lCol)) != TetrisConstants.NO_DATA)
 				//(i,j) pertenecen al cuadrado del layout
 				{
-						ret += toDraw; 
+						ret += TetrisConstants.BLOCK_VO; 
 		
+				}
+				else if(board[i][j] == TetrisConstants.NO_DATA)
+				{
+					ret += TetrisConstants.NO_DATA_VO; 
 				}
 				else
 				{
-					ret += board[i][j];
+					ret += TetrisConstants.BLOCK_VO; 
 				}
 				ret += " ";
 			}
