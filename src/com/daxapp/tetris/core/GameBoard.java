@@ -56,8 +56,8 @@ public class GameBoard
 	
 	//Mueve hacia abajo al tetrimino, chequeando si existen colisiones o si tiene
 	//movimientos disponibles, de no ser posible ninguna de las dos cosas, significa
-	//que el tetrimino está dead! muajaja(?
-	public void stepDownTetrimino()
+	//que el tetrimino está dead!
+	public boolean stepDownTetrimino()
 	{
 		
 		if(currentLayout.hasDownAvail() && !collisionResult.isDownCollision())
@@ -65,11 +65,13 @@ public class GameBoard
 			currentRow++;
 			currentLayout.onMoveDown();
 			collisionResult = checkCollision();
+			return true;
 		}
 		else
 		{
 			tetriminoDead = true;
 			putOnBoard();
+			return false;
 		}
 		
 	}
@@ -108,6 +110,12 @@ public class GameBoard
 			currentRow += currentLayout.getRowOffset();
 			collisionResult = checkCollision();
 		}
+	}
+	
+	//Baja la pieza hasta que choca con otra o llega hasta el fondo
+	public void instantDownTetrimino()
+	{
+		while(stepDownTetrimino());
 	}
 
 	//Si el tetrimino no está muerto(no esta en el fondo o parado por otro tetrimino)

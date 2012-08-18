@@ -64,6 +64,10 @@ public class TetrisLogic extends BaseGameLogic
 				case KeyEvent.VK_DOWN:
 					tetrisBoard.stepDownTetrimino();
 					break;
+				
+				case KeyEvent.VK_SPACE:
+					tetrisBoard.instantDownTetrimino();
+					break;
 					
 			}
 		}
