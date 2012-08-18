@@ -83,15 +83,18 @@ public class TetrisLogic extends BaseGameLogic
 			
 		}
 		gravityStepCounter++; //Incremento en 1 el conteo de frames antes del paso por gravedad...
-		return tetrisBoard.isDefeated();
+		return tetrisBoard.isDefeated(); //Retorno si es juego está terminado
 		
 	}
 
 	protected void onGraphicsUpdate()
 	{
+		boardPanel.setPoints(points + "");
+		boardPanel.setLevel(level + "");
+		boardPanel.setLines(totalLines + "");
+		
 		boardPanel.setToDraw(tetrisBoard.toString());
 		boardPanel.updateUI();
-		System.out.println(points);
 	
 	}
 

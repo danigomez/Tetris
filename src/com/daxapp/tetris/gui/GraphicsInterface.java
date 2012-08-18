@@ -11,6 +11,7 @@ import com.daxapp.tetris.input.listener.InputHandler;
 public class GraphicsInterface extends JFrame
 {
 	protected TetrisPanel boardPanel;
+	
 	protected InputHandler handler;
 	protected String selectedPanel = "ASCII";
 	//TODO este valor se toma de un menu dentro de la ventana
@@ -26,10 +27,13 @@ public class GraphicsInterface extends JFrame
 		this.setTitle(ResourcesLoaderHelper.loadPhraseById("APP_TITLE") + " " + ResourcesLoaderHelper.loadPhraseById("APP_VERSION"));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(boardPanel);
+//		this.add(pointsPanel);
+		
 		this.pack();
 		this.setVisible(true);
 		this.setFocusable(true);
-		this.setResizable(false);
+//		this.setResizable(false);
+
 		
 	}
 
