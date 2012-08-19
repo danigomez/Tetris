@@ -44,7 +44,6 @@ public class TetrisLogic extends BaseGameLogic
 
 	protected void onInputEvent()
 	{
-		//TODO Que las teclas y sus acciones se levanten del archivo de configuracion
 		if(tetrisBoard.isTetriminoAlive())
 		{
 			switch(handler.getKeyPressed())

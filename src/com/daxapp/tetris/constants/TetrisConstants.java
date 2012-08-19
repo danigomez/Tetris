@@ -16,7 +16,7 @@ public interface TetrisConstants
 	public static final int TETRIS_ROW = 18 + BIAS;
 
 	public static final int LINES_PER_LEVEL = 10; //Líneas que hay que hacer para cambiar de nivel
-	public static final int HOLD_TIME_DECREMENT = 2; //Cuantos cuadros menos tarda el step por nivel
+	public static final int HOLD_TIME_DECREMENT = 1; //Cuantos cuadros menos tarda el step por nivel
 	
 	/*Puntajes*/
 	public static final int SIMPLE = 40;
