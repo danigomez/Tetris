@@ -160,7 +160,6 @@ public class GameBoard
 		//int bias = currentLayout.getBias(); //Cant de íneas en blanco q no tienen q ser dibujadas
 	
 		int lRow,lCol;
-		int toDraw;
 		
 		for(int i = TetrisConstants.BIAS; i < TetrisConstants.TETRIS_ROW;i++)
 		{
@@ -171,7 +170,7 @@ public class GameBoard
 				
 				if(BoardRegionHelper.isOnBoardRegion(i, j, currentRow, currentCol, size , size) 
 						&& lRow < size
-						&& (toDraw = currentLayout.getAtPos(lRow, lCol)) != TetrisConstants.NO_DATA)
+						&& currentLayout.getAtPos(lRow, lCol) != TetrisConstants.NO_DATA)
 				//(i,j) pertenecen al cuadrado del layout
 				{
 						ret += TetrisConstants.BLOCK_VO; 
