@@ -50,7 +50,7 @@ public class GraphicsInterface extends JFrame implements ItemListener
 		TetrisMenuItem item = (TetrisMenuItem)e.getItem();
 		if(item.getState())
 		{
-			//Tomo la instancia del panel que se halla seleccionado en el menú
+			//Tomo la instancia del panel que se haya seleccionado en el menú
 			boardPanel = (TetrisPanel)ResourcesLoaderHelper.loadInstanceById(item.getPhraseId());
 			
 			this.getContentPane().removeAll();
