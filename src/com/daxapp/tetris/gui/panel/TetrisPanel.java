@@ -16,10 +16,12 @@ public class TetrisPanel extends JPanel
 	protected String points="";
 	protected String level="";
 	protected String lines ="";
+	protected int colDraw;
 	
 	public TetrisPanel()
 	{
 		setBorder(BorderFactory.createLineBorder(Color.black));
+		colDraw = 250;
 	}
 	
 	
@@ -50,9 +52,9 @@ public class TetrisPanel extends JPanel
 		
 		g.setFont(g.getFont().deriveFont(20f));
 		//Imprimo la info del juego actual!
-		g.drawString("Puntos:" + points +"\n", 250, 45);
-		g.drawString("Nivel:" + level +"\n", 250, 65);
-		g.drawString("Lineas:" + lines , 250, 85);
+		g.drawString("Puntos:" + points +"\n", colDraw, 45);
+		g.drawString("Nivel:" + level +"\n", colDraw, 65);
+		g.drawString("Lineas:" + lines , colDraw, 85);
 	}
 	
 	public Dimension getPreferredSize() 

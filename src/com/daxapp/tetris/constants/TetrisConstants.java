@@ -23,7 +23,7 @@ public interface TetrisConstants
 	public static final int DOBLE = 100;
 	public static final int TRIPlE = 300;
 	public static final int TETRIS = 1200;
-	public static final String START_GRAPH_MODE = "ASCII";
+	public static final String START_GRAPH_MODE = "TEXTURE";
 	
 	/*ASCII*/
 	

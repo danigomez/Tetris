@@ -4,6 +4,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
+import com.daxapp.tetris.constants.TetrisConstants;
 import com.daxapp.tetris.core.util.ResourcesLoaderHelper;
 import com.daxapp.tetris.gui.GraphicsInterface;
 
@@ -23,8 +24,12 @@ public class TetrisMenuBar extends JMenuBar
 		ButtonGroup group = new ButtonGroup();
 		
 		asciiItem = new TetrisMenuItem("ASCII");
-		asciiItem.setSelected(true); //TODO hacer que esto se setee según START_GRAPH_MODE
 		textureItem = new TetrisMenuItem("TEXTURE");
+		
+		if(TetrisConstants.START_GRAPH_MODE.equals("ASCII"))
+			asciiItem.setSelected(true);
+		if(TetrisConstants.START_GRAPH_MODE.equals("TEXTURE"))
+			textureItem.setSelected(true); 
 		
 		group.add(asciiItem);
 		group.add(textureItem);

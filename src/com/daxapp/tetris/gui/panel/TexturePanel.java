@@ -1,5 +1,6 @@
 package com.daxapp.tetris.gui.panel;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -25,6 +26,7 @@ public class TexturePanel extends TetrisPanel
 			no_data = new ImageIcon(this.getClass().getResource("/resources/images/no_data.png")).getImage();
 			height = block.getHeight(this);
 			width = block.getWidth(this);
+			colDraw += 30;
 		}
 		catch (Exception e)
 		{
@@ -37,8 +39,8 @@ public class TexturePanel extends TetrisPanel
 		super.paint(g);
 		
 		
-		int x = 19;
-		int y = 45;
+		int x = 1;
+		int y = 1;
 		for(String row : toDraw.split("\n"))
 		{
 			for(int i = 0; i < row.length(); i++)
@@ -54,9 +56,14 @@ public class TexturePanel extends TetrisPanel
 				
 				x += width;
 			}
-			x = 19;
+			x = 1;
 			y += height;
 
 		}
+	}
+
+	public Dimension getPreferredSize()
+	{
+		return new Dimension(420, 461);
 	}
 }
