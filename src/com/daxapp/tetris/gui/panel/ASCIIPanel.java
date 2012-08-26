@@ -3,8 +3,6 @@ package com.daxapp.tetris.gui.panel;
 import java.awt.Font;
 import java.awt.Graphics;
 
-import com.daxapp.tetris.constants.TetrisConstants;
-
 public class ASCIIPanel extends TetrisPanel
 {
 	public void paint(Graphics g)

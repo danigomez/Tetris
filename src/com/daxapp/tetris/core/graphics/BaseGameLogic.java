@@ -28,6 +28,11 @@ public abstract class BaseGameLogic extends GraphicsInterface
 	
 		while(!lose)
 		{
+			if(reset)
+			{
+				reset = false;
+				return;
+			}
 			auxiliarProc();
 			if(System.currentTimeMillis() - start >= frametime)
 			{

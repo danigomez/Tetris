@@ -6,6 +6,8 @@ import com.daxapp.tetris.constants.TetrisConstants;
 import com.daxapp.tetris.core.GameBoard;
 import com.daxapp.tetris.pool.TetriminoPool;
 
+//TODO fijarrse de agregar sonidooo!! :D
+//
 @SuppressWarnings("serial")
 public class TetrisLogic extends BaseGameLogic
 {
@@ -103,7 +105,7 @@ public class TetrisLogic extends BaseGameLogic
 
 	protected void onSoundPlay()
 	{
-	
+		//TODO hacer estooooooooooooooooooooooooo!
 	}
 	
 	private int updatePoints(int lines)
@@ -135,7 +137,8 @@ public class TetrisLogic extends BaseGameLogic
 	public static void main(String[] args)
 	{
 		TetrisLogic tet = new TetrisLogic();
-		tet.Game();
+		while(true)
+			tet.Game();
 
 	}
 }

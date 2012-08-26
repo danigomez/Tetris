@@ -8,10 +8,6 @@ import javax.swing.ImageIcon;
 
 import com.daxapp.tetris.constants.TetrisConstants;
 
-/*PRIORIDAD*/
-//TODO Levantar imagenes de cada bloque del tetrimino y dibuja el tetrimino y el tablero!!
-//Averiguar como cargar imagenes con Swing!!!
-
 public class TexturePanel extends TetrisPanel
 {
 	private Image block = null;
@@ -64,6 +60,6 @@ public class TexturePanel extends TetrisPanel
 
 	public Dimension getPreferredSize()
 	{
-		return new Dimension(420, 461);
+		return new Dimension(420, 465);
 	}
 }
