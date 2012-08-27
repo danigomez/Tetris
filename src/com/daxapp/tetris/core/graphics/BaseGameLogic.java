@@ -23,16 +23,19 @@ public abstract class BaseGameLogic extends GraphicsInterface
 		int fps = TetrisConstants.FPS;
 		long frametime = 1000/fps;
 		long start = System.currentTimeMillis(); //Tiempo inicial para conteo de frame
-	
+		reset = false;
+		//Se indica que ya inicio el juego.... y que no debe reiniciarse a menos que se lo indique explicitamente
+		
+		
 		onCreateResources(); //Cargo los recursos necesarios para el juego
 	
 		while(!lose)
 		{
-			if(reset)
+			if(reset) //La variable reset puede ser modificada para indicar que debe reiniciar el juego
 			{
-				reset = false;
 				return;
 			}
+			
 			auxiliarProc();
 			if(System.currentTimeMillis() - start >= frametime)
 			{

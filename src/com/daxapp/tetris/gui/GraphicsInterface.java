@@ -24,7 +24,7 @@ public class GraphicsInterface extends JFrame implements ItemListener, ActionLis
 	
 	protected InputHandler handler;
 	protected String selectedPanel = TetrisConstants.START_GRAPH_MODE;
-	protected boolean reset = false;
+	protected boolean reset = true; //Indica que se debe comenzar el juego
 	
 	public GraphicsInterface()
 	{
@@ -69,6 +69,11 @@ public class GraphicsInterface extends JFrame implements ItemListener, ActionLis
 	{
 		reset = true;
 		
+	}
+	
+	public boolean isReset()
+	{
+		return reset;
 	}
 
 	

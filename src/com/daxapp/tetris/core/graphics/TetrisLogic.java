@@ -138,7 +138,9 @@ public class TetrisLogic extends BaseGameLogic
 	{
 		TetrisLogic tet = new TetrisLogic();
 		while(true)
-			tet.Game();
-
+		{
+			if(tet.isReset())
+				tet.Game();
+		}
 	}
 }
