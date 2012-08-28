@@ -25,4 +25,11 @@ public class ASCIIPanel extends TetrisPanel
 		
 	}
 
+	@Override
+	protected void paintNext(Graphics g)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 }

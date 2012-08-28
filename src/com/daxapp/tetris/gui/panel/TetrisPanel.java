@@ -7,16 +7,23 @@ import java.awt.Graphics;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import com.daxapp.tetris.core.Tetrimino;
+import com.daxapp.tetris.core.util.ResourcesLoaderHelper;
+
 
 
 @SuppressWarnings("serial")
-public class TetrisPanel extends JPanel
+public abstract class TetrisPanel extends JPanel
 {
 	protected String toDraw="";
 	protected String points="";
 	protected String level="";
 	protected String lines ="";
 	protected int colDraw;
+	
+	protected String nextTetrimino;
+	
+	protected abstract void paintNext(Graphics g);
 	
 	public TetrisPanel()
 	{
@@ -52,14 +59,26 @@ public class TetrisPanel extends JPanel
 		
 		g.setFont(g.getFont().deriveFont(20f));
 		//Imprimo la info del juego actual!
-		g.drawString("Puntos:" + points +"\n", colDraw, 45);
-		g.drawString("Nivel:" + level +"\n", colDraw, 65);
-		g.drawString("Lineas:" + lines , colDraw, 85);
+		g.drawString(ResourcesLoaderHelper.loadPhraseById("POINTS") + points +"\n", colDraw, 45);
+		g.drawString(ResourcesLoaderHelper.loadPhraseById("LEVEL") + level +"\n", colDraw, 65);
+		g.drawString(ResourcesLoaderHelper.loadPhraseById("LINES") + lines , colDraw, 85);
+		if(nextTetrimino!=null)
+		{
+			g.drawString(ResourcesLoaderHelper.loadPhraseById("NEXT") , colDraw, 125);
+			paintNext(g);
+		}
 	}
 	
 	public Dimension getPreferredSize() 
 	{
 		return new Dimension(400,400);
+	}
+
+
+	public void setNextTetrimino(String next)
+	{
+		nextTetrimino = next;
+		
 	}
 	 
 

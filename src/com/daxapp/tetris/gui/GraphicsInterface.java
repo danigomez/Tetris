@@ -15,7 +15,7 @@ import com.daxapp.tetris.gui.menu.TetrisMenuBar;
 import com.daxapp.tetris.gui.panel.TetrisPanel;
 import com.daxapp.tetris.input.listener.InputHandler;
 
-
+//TODO hacer lo del reset!!!!!! (No es muy urgente)
 @SuppressWarnings("serial")
 public class GraphicsInterface extends JFrame implements ItemListener, ActionListener
 {

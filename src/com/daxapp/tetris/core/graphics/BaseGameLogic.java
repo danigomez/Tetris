@@ -31,11 +31,7 @@ public abstract class BaseGameLogic extends GraphicsInterface
 	
 		while(!lose)
 		{
-			if(reset) //La variable reset puede ser modificada para indicar que debe reiniciar el juego
-			{
-				return;
-			}
-			
+	
 			auxiliarProc();
 			if(System.currentTimeMillis() - start >= frametime)
 			{

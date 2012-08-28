@@ -4,15 +4,23 @@ import java.awt.event.KeyEvent;
 
 import com.daxapp.tetris.constants.TetrisConstants;
 import com.daxapp.tetris.core.GameBoard;
+import com.daxapp.tetris.core.Tetrimino;
 import com.daxapp.tetris.pool.TetriminoPool;
 
-//TODO fijarrse de agregar sonidooo!! :D
-//
+
+//TODO hacer la funcionalidad para hacer hold del tetrimino...
+//lo que hace es al estar una pieza en juego la saca y la guarda e inserta otra,
+//una vez insertada esa pieza no se puede holdear hasta que muera
+//TODO fijarrse de agregar sonidooo!!
+
 @SuppressWarnings("serial")
 public class TetrisLogic extends BaseGameLogic
 {
 	private GameBoard tetrisBoard;
 	private TetriminoPool pool;
+	
+	private Tetrimino next;
+	//private Tetrimino hold;
 	
 	private int framesToStep;
 	private int points;
@@ -31,6 +39,7 @@ public class TetrisLogic extends BaseGameLogic
 		points = 0;
 		totalLines = 0;
 		gravityStepCounter = 0;
+		next = pool.getTetrimino();
 		
 	}
 	
@@ -69,6 +78,9 @@ public class TetrisLogic extends BaseGameLogic
 				case KeyEvent.VK_SPACE:
 					tetrisBoard.instantDownTetrimino();
 					break;
+				case KeyEvent.VK_SHIFT:
+					//shiftTetrimino();
+					break;
 					
 			}
 		}
@@ -84,7 +96,9 @@ public class TetrisLogic extends BaseGameLogic
 			totalLines += lines;
 			points += updatePoints(lines);	
 			level = updateLevel(totalLines);
-			tetrisBoard.putTetrimino(pool.getTetrimino());
+			tetrisBoard.putTetrimino(next);
+			
+			next = pool.getTetrimino();
 			
 		}
 		gravityStepCounter++; //Incremento en 1 el conteo de frames antes del paso por gravedad...
@@ -97,7 +111,8 @@ public class TetrisLogic extends BaseGameLogic
 		boardPanel.setPoints(points + "");
 		boardPanel.setLevel(level + "");
 		boardPanel.setLines(totalLines + "");
-		
+		boardPanel.setNextTetrimino(next.toString());
+;
 		boardPanel.setToDraw(tetrisBoard.toString());
 		boardPanel.updateUI();
 	
@@ -137,10 +152,7 @@ public class TetrisLogic extends BaseGameLogic
 	public static void main(String[] args)
 	{
 		TetrisLogic tet = new TetrisLogic();
-		while(true)
-		{
-			if(tet.isReset())
-				tet.Game();
-		}
+		tet.Game();
+		
 	}
 }

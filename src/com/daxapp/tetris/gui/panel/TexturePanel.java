@@ -14,6 +14,7 @@ public class TexturePanel extends TetrisPanel
 	private Image no_data = null;
 	private int height;
 	private int width; 
+	
 	public TexturePanel()
 	{
 		try
@@ -61,5 +62,27 @@ public class TexturePanel extends TetrisPanel
 	public Dimension getPreferredSize()
 	{
 		return new Dimension(420, 465);
+	}
+
+	protected void paintNext(Graphics g)
+	{
+		int x = 290;
+		int y = 135;
+		for(String row : nextTetrimino.split("\n"))
+		{
+			for(int i = 0; i < row.length(); i++)
+			{
+				String c = String.valueOf(row.charAt(i));
+
+				if(c.equals(TetrisConstants.BLOCK + ""))
+					g.drawImage(block,x,y,this);
+				
+				x += width;
+					
+			}
+			x = 290;
+			y += height;
+		}
+		
 	}
 }
