@@ -26,10 +26,11 @@ public class ASCIIPanel extends TetrisPanel
 	}
 
 	@Override
-	protected void paintNext(Graphics g)
+	protected void paintNext(Graphics g, String tetrimino, int x, int y)
 	{
-		// TODO Auto-generated method stub
+		return;
 		
 	}
+
 
 }

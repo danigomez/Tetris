@@ -64,24 +64,24 @@ public class TexturePanel extends TetrisPanel
 		return new Dimension(420, 465);
 	}
 
-	protected void paintNext(Graphics g)
+	protected void paintNext(Graphics g, String tetrimino,int x,int y)
 	{
-		int x = 290;
-		int y = 135;
-		for(String row : nextTetrimino.split("\n"))
+		int x1 = x;
+		int y1 = y;
+		for(String row : tetrimino.split("\n"))
 		{
 			for(int i = 0; i < row.length(); i++)
 			{
 				String c = String.valueOf(row.charAt(i));
 
 				if(c.equals(TetrisConstants.BLOCK + ""))
-					g.drawImage(block,x,y,this);
+					g.drawImage(block,x1,y1,this);
 				
-				x += width;
+				x1 += width;
 					
 			}
-			x = 290;
-			y += height;
+			x1 = x;
+			y1 += height;
 		}
 		
 	}

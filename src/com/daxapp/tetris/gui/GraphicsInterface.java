@@ -6,7 +6,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.JFrame;
-import javax.swing.JMenuItem;
 
 import com.daxapp.tetris.constants.TetrisConstants;
 import com.daxapp.tetris.core.util.ResourcesLoaderHelper;
@@ -74,6 +73,12 @@ public class GraphicsInterface extends JFrame implements ItemListener, ActionLis
 	public boolean isReset()
 	{
 		return reset;
+	}
+	
+	
+	public void switchReset()
+	{
+		reset = !reset;
 	}
 
 	

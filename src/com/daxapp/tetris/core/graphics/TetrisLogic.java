@@ -19,8 +19,9 @@ public class TetrisLogic extends BaseGameLogic
 	private GameBoard tetrisBoard;
 	private TetriminoPool pool;
 	
+	private Tetrimino current;
 	private Tetrimino next;
-	//private Tetrimino hold;
+	private Tetrimino hold;
 	
 	private int framesToStep;
 	private int points;
@@ -28,18 +29,24 @@ public class TetrisLogic extends BaseGameLogic
 	private int level;
 	private int totalLines;
 	
+	private boolean isOnShift;
+	
 	protected void onCreateResources()
 	{
 		pool = new TetriminoPool();
 		tetrisBoard = new GameBoard(TetrisConstants.TETRIS_ROW,TetrisConstants.TETRIS_COL);
-		tetrisBoard.putTetrimino(pool.getTetrimino()); //Para evitar excepciones al estar el tablero vacio al iniciar el juego
-		framesToStep = TetrisConstants.HOLD_TIME_TO_STEP;//Tiempo de espera inicial para la dificultad más baja
+		current = pool.getTetrimino();
+		next = pool.getTetrimino();
 		
+		framesToStep = TetrisConstants.HOLD_TIME_TO_STEP;//Tiempo de espera inicial para la dificultad más baja
 		level = 0; //TODO que se pueda elegir en que nivel empezar
 		points = 0;
 		totalLines = 0;
 		gravityStepCounter = 0;
-		next = pool.getTetrimino();
+		isOnShift = false;
+		
+		tetrisBoard.putTetrimino(current); //Para evitar excepciones al estar el tablero vacio al iniciar el juego
+
 		
 	}
 	
@@ -79,7 +86,7 @@ public class TetrisLogic extends BaseGameLogic
 					tetrisBoard.instantDownTetrimino();
 					break;
 				case KeyEvent.VK_SHIFT:
-					//shiftTetrimino();
+					shiftTetrimino();
 					break;
 					
 			}
@@ -96,9 +103,13 @@ public class TetrisLogic extends BaseGameLogic
 			totalLines += lines;
 			points += updatePoints(lines);	
 			level = updateLevel(totalLines);
-			tetrisBoard.putTetrimino(next);
 			
+			tetrisBoard.putTetrimino(next);
+			current = next;
 			next = pool.getTetrimino();
+			
+			isOnShift = false;
+			
 			
 		}
 		gravityStepCounter++; //Incremento en 1 el conteo de frames antes del paso por gravedad...
@@ -112,7 +123,8 @@ public class TetrisLogic extends BaseGameLogic
 		boardPanel.setLevel(level + "");
 		boardPanel.setLines(totalLines + "");
 		boardPanel.setNextTetrimino(next.toString());
-;
+		if(hold!=null)boardPanel.setHoldTetrimo(hold.toString());
+
 		boardPanel.setToDraw(tetrisBoard.toString());
 		boardPanel.updateUI();
 	
@@ -123,6 +135,32 @@ public class TetrisLogic extends BaseGameLogic
 		//TODO hacer estooooooooooooooooooooooooo!
 	}
 	
+
+	private void shiftTetrimino()
+	{
+		if(hold == null)
+		{
+			tetrisBoard.putTetrimino(next);
+			hold = current;
+			current = next;
+			next = pool.getTetrimino();
+			
+		}
+		else if(!isOnShift)
+		{
+			Tetrimino aux;
+			
+			tetrisBoard.putTetrimino(hold);
+			aux = current;
+			current = hold;
+			hold = aux;
+
+		}
+		
+		isOnShift = true;
+		
+	}
+
 	private int updatePoints(int lines)
 	{
 		switch(lines)

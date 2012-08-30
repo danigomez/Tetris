@@ -7,7 +7,6 @@ import java.awt.Graphics;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import com.daxapp.tetris.core.Tetrimino;
 import com.daxapp.tetris.core.util.ResourcesLoaderHelper;
 
 
@@ -21,9 +20,10 @@ public abstract class TetrisPanel extends JPanel
 	protected String lines ="";
 	protected int colDraw;
 	
-	protected String nextTetrimino;
+	private String nextTetrimino;
+	private String holdTetrimino;
 	
-	protected abstract void paintNext(Graphics g);
+	protected abstract void paintNext(Graphics g,String tetrimino,int x, int y);
 	
 	public TetrisPanel()
 	{
@@ -62,11 +62,19 @@ public abstract class TetrisPanel extends JPanel
 		g.drawString(ResourcesLoaderHelper.loadPhraseById("POINTS") + points +"\n", colDraw, 45);
 		g.drawString(ResourcesLoaderHelper.loadPhraseById("LEVEL") + level +"\n", colDraw, 65);
 		g.drawString(ResourcesLoaderHelper.loadPhraseById("LINES") + lines , colDraw, 85);
-		if(nextTetrimino!=null)
+
+		
+		g.drawString(ResourcesLoaderHelper.loadPhraseById("HOLD") , colDraw, 125);
+		if(holdTetrimino != null)
 		{
-			g.drawString(ResourcesLoaderHelper.loadPhraseById("NEXT") , colDraw, 125);
-			paintNext(g);
+			paintNext(g, holdTetrimino, 290,135);
 		}
+		if(nextTetrimino != null)
+		{
+			g.drawString(ResourcesLoaderHelper.loadPhraseById("NEXT") , colDraw, 245);
+			paintNext(g, nextTetrimino,290,250);
+		}
+		
 	}
 	
 	public Dimension getPreferredSize() 
@@ -79,6 +87,11 @@ public abstract class TetrisPanel extends JPanel
 	{
 		nextTetrimino = next;
 		
+	}
+	
+	public void setHoldTetrimo(String hold)
+	{
+		holdTetrimino = hold;
 	}
 	 
 
