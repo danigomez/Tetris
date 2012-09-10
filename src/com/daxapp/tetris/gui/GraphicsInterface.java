@@ -33,7 +33,7 @@ public class GraphicsInterface extends JFrame implements ItemListener, ActionLis
 		
 		menuBar.setListenerClass(this);
 		
-		this.addKeyListener(handler);
+		setInputListener();
 		this.setTitle(ResourcesLoaderHelper.loadPhraseById("APP_TITLE") + " " + ResourcesLoaderHelper.loadPhraseById("APP_VERSION"));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(boardPanel);
@@ -66,7 +66,7 @@ public class GraphicsInterface extends JFrame implements ItemListener, ActionLis
 
 	public void actionPerformed(ActionEvent e)
 	{
-		reset = true;
+		setResetStatus(true);
 		
 	}
 	
@@ -75,12 +75,20 @@ public class GraphicsInterface extends JFrame implements ItemListener, ActionLis
 		return reset;
 	}
 	
-	
-	public void switchReset()
+	public void setResetStatus(boolean status)
 	{
-		reset = !reset;
+		reset = status;
 	}
-
+	
+	public void setInputListener()
+	{
+		this.addKeyListener(handler);
+	}
+	
+	public void removeInputListener()
+	{
+		this.removeKeyListener(handler);
+	}
 	
 
 }

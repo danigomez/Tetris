@@ -8,9 +8,6 @@ import com.daxapp.tetris.core.Tetrimino;
 import com.daxapp.tetris.pool.TetriminoPool;
 
 
-//TODO hacer la funcionalidad para hacer hold del tetrimino...
-//lo que hace es al estar una pieza en juego la saca y la guarda e inserta otra,
-//una vez insertada esa pieza no se puede holdear hasta que muera
 //TODO fijarrse de agregar sonidooo!!
 
 @SuppressWarnings("serial")
@@ -190,7 +187,19 @@ public class TetrisLogic extends BaseGameLogic
 	public static void main(String[] args)
 	{
 		TetrisLogic tet = new TetrisLogic();
-		tet.Game();
+
+		while(true)
+		{
+			if(tet.isReset())
+			{
+				tet.setResetStatus(false);
+				tet.setInputListener();
+				tet.Game();
+				
+			}
+			tet.removeInputListener();
+		}
+		
 		
 	}
 }
